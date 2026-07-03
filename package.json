@@ -10,7 +10,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "convert-frequency": "bun scripts/convert-frequency.ts"
+    "convert-frequency": "bun scripts/convert-frequency.ts",
+    "test": "bun test"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.3.2",

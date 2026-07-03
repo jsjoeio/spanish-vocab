@@ -56,14 +56,13 @@ export function resultsHtml(
   knownCount: number,
   totalCount: number,
   sourceSize: number,
-  sourceName: string
+  sourceName: string,
+  coveragePercent: number
 ): string {
   const formatted = estimate.toLocaleString('en-US');
   const formattedLow = low.toLocaleString('en-US');
   const formattedHigh = high.toLocaleString('en-US');
   const formattedSource = sourceSize.toLocaleString('en-US');
-  const coveragePercent =
-    sourceSize > 0 ? Math.round((estimate / sourceSize) * 100) : 0;
   const safeLevel = escapeHtml(level);
   const safeCefr = escapeHtml(cefr);
   const safeFeedback = escapeHtml(feedback);
@@ -97,7 +96,7 @@ export function resultsHtml(
         <span class="${badge}">${safeCefr}</span>
         <span class="rounded-full border border-indigo-500 px-2.5 py-0.5 text-sm font-semibold whitespace-nowrap text-indigo-700">${safeLevel}</span>
       </div>
-      <p class="mt-3 text-xs text-gray-500">Indicative level for this word list — not an official CEFR exam score.</p>
+      <p class="mt-3 text-xs text-gray-500">${safeCefr} band is based on ~${coveragePercent}% list coverage — not an official CEFR exam score.</p>
       <p class="mt-4 text-left text-sm text-gray-700 leading-relaxed">${safeFeedback}</p>
     </div>
   `;
