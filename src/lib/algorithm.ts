@@ -191,13 +191,13 @@ export function estimateVocabulary(
   };
 }
 
-/** map estimate to CEFR level — rough thresholds, easy to tune later */
+/** map vocabulary estimate (lemmas) to CEFR — aligned with Lenguia/SpeakZy-style test data */
 export function getCefrLevel(estimate: number): string {
-  if (estimate < 1_000) return 'A1';
-  if (estimate < 2_500) return 'A2';
-  if (estimate < 5_000) return 'B1';
-  if (estimate < 10_000) return 'B2';
-  if (estimate < 16_000) return 'C1';
+  if (estimate < 800) return 'A1';
+  if (estimate < 2_000) return 'A2';
+  if (estimate < 4_000) return 'B1';
+  if (estimate < 7_500) return 'B2';
+  if (estimate < 12_000) return 'C1';
   return 'C2';
 }
 
