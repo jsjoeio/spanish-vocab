@@ -1,0 +1,124 @@
+---
+import { btnNo, btnPrimary, btnQuiet, btnSecondary, btnYes, card } from '../lib/hyperui';
+---
+
+<div id="vocab-test" class="mx-auto w-full max-w-lg">
+  <!-- Intro screen -->
+  <div id="screen-intro" class="text-center">
+    <h1 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+      Spanish Vocabulary Test
+    </h1>
+    <p class="mt-4 text-sm text-gray-700 leading-relaxed">
+      You'll see 50 Spanish words. Mark each one <strong>Yes</strong> if you know
+      its meaning, or <strong>No</strong> if you don't. Be honest — it improves the estimate.
+    </p>
+    <button id="btn-start" type="button" class:list={['mt-8', btnPrimary]}>
+      Start test
+    </button>
+  </div>
+
+  <!-- Test screen -->
+  <div id="screen-test" class="hidden">
+    <div id="progress-container" class="mb-8"></div>
+
+    <div class={card}>
+      <p class="text-sm font-medium text-gray-700">Do you know this word?</p>
+      <p id="current-word" class="mt-3 text-4xl font-bold text-gray-900 sm:text-5xl"></p>
+
+      <div class="mt-8 grid grid-cols-2 gap-3">
+        <button id="btn-no" type="button" class={btnNo}>No</button>
+        <button id="btn-yes" type="button" class={btnYes}>Yes</button>
+      </div>
+    </div>
+
+    <button id="btn-finish" type="button" class:list={['mt-6', btnQuiet]}>
+      Finish early
+    </button>
+  </div>
+
+  <!-- Results screen -->
+  <div id="screen-results" class="hidden">
+    <div class={card}>
+      <div id="results-content"></div>
+    </div>
+    <button id="btn-restart" type="button" class:list={['mt-6', btnSecondary]}>
+      Take test again
+    </button>
+  </div>
+</div>
+
+<script>
+  import words from '../data/words.json';
+  import { estimateVocabulary } from '../lib/estimate';
+  import { progressBarHtml, resultsHtml } from '../lib/hyperui';
+
+  const screens = {
+    intro: document.getElementById('screen-intro')!,
+    test: document.getElementById('screen-test')!,
+    results: document.getElementById('screen-results')!,
+  };
+
+  const currentWord = document.getElementById('current-word')!;
+  const progressContainer = document.getElementById('progress-container')!;
+  const resultsContent = document.getElementById('results-content')!;
+
+  let currentIndex = 0;
+  let answers: boolean[] = [];
+
+  function showScreen(name: keyof typeof screens) {
+    Object.values(screens).forEach((el) => el.classList.add('hidden'));
+    screens[name].classList.remove('hidden');
+  }
+
+  function renderWord() {
+    currentWord.textContent = words[currentIndex].word;
+    progressContainer.innerHTML = progressBarHtml(answers.length, words.length);
+  }
+
+  function renderResults() {
+    const testedWords = words.slice(0, answers.length);
+    const result = estimateVocabulary(testedWords, answers);
+
+    resultsContent.innerHTML = resultsHtml(
+      result.estimate,
+      result.level,
+      result.feedback,
+      result.knownCount,
+      result.totalCount
+    );
+  }
+
+  function answer(known: boolean) {
+    answers.push(known);
+    currentIndex++;
+
+    if (currentIndex >= words.length) {
+      renderResults();
+      showScreen('results');
+      return;
+    }
+
+    renderWord();
+  }
+
+  function startTest() {
+    currentIndex = 0;
+    answers = [];
+    renderWord();
+    showScreen('test');
+  }
+
+  function finishEarly() {
+    if (answers.length === 0) return;
+    renderResults();
+    showScreen('results');
+  }
+
+  document.getElementById('btn-start')!.addEventListener('click', startTest);
+  document.getElementById('btn-yes')!.addEventListener('click', () => answer(true));
+  document.getElementById('btn-no')!.addEventListener('click', () => answer(false));
+  document.getElementById('btn-finish')!.addEventListener('click', finishEarly);
+  document.getElementById('btn-restart')!.addEventListener('click', () => {
+    showScreen('intro');
+  });
+</script>

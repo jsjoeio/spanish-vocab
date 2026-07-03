@@ -15,6 +15,7 @@ Build a free, accurate, open-source web tool to estimate Spanish vocabulary size
 ### Stack
 
 - Astro + Tailwind CSS + TypeScript
+- [HyperUI](https://www.hyperui.dev/) for UI component patterns (copy-paste Tailwind components)
 - Bun as package manager
 - 100% client-side (no backend)
 
@@ -39,7 +40,7 @@ A functional, polished UI to validate the user experience before connecting real
    - Test UI (Yes/No per word, progress, Finish button)
    - Results with simulated estimate and feedback
 4. Keep everything client-side.
-5. Simple, mobile-friendly design.
+5. Simple, mobile-friendly design using HyperUI components.
 
 ## Acceptance Criteria
 
