@@ -1,36 +1,36 @@
 lemma,frequency
-decir,1224
-pasar,804
+decir,1260
+pasar,813
 querer,791
 cosa,647
-ver,566
+ver,584
 año,542
 momento,500
+sentir,410
 viste,408
-sentir,401
-hablar,392
+hablar,407
+dar,402
 estar,392
 tipo,378
-comer,375
+comer,378
 hijo,370
 mamá,362
 empezar,338
 padre,336
-dar,327
+tener,324
 vida,319
-tener,309
 tiempo,309
 venir,292
+hacer,288
 gustar,282
 pensar,278
 casa,277
 familia,277
+poner,274
 tema,273
-hacer,261
 tenés,255
-poner,222
+dejar,244
 persona,222
-dejar,214
 salir,212
 gente,210
 miedo,210
@@ -38,14 +38,16 @@ poder,206
 hija,193
 llegar,191
 acá,189
+mirar,188
 niño,184
-mirar,181
 ejemplo,181
 che,178
+entender,178
 entendés,177
-entender,175
 suceder,173
+quedar,172
 bebé,171
+vivir,169
 jugar,169
 hora,168
 situación,168
@@ -53,17 +55,15 @@ papá,168
 embarazado,163
 importante,162
 mes,162
-quedar,160
-vivir,160
 madre,160
-nbsp,156
 mundo,156
 montón,156
+acompañar,154
 amigo,152
+contar,150
+caer,144
 celular,144
-contar,142
-acompañar,142
-caer,138
+sacar,141
 mira,138
 chico,137
 mañana,132
@@ -77,28 +77,28 @@ difícil,123
 comida,123
 realidad,120
 lugar,120
+buscar,118
 llorar,117
 sos,117
 alimentación,117
-sacar,114
 caso,111
-buscar,109
+dormir,109
+llevar,108
 comar,108
-dormir,106
+preguntar,107
+cambiar,107
 seguir,105
 decís,105
+haber,103
 realmente,103
-llevar,102
 pañal,102
-haber,100
+aprender,100
 red,99
-preguntar,98
+llamar,99
 tomar,98
-aprender,97
+trabajar,98
 perfecto,96
 nacer,96
-trabajar,95
-cambiar,95
 mujer,94
 pantalla,94
 embarazo,93
@@ -108,25 +108,26 @@ tecnología,93
 tratar,91
 aparecer,91
 principio,90
-llamar,90
 gracias,90
+escuchar,89
 pareja,88
 problema,87
+mostrar,86
 teta,86
 amiga,85
 video,85
 pregunta,85
 querés,84
 punto,84
-escuchar,83
 marido,82
+saber,81
 noche,81
 jardín,81
 cabeza,80
 necesitar,80
+comprar,79
 tranquilo,79
 loco,79
-saber,78
 nati,78
 aparte,76
 cama,75
@@ -135,34 +136,34 @@ capaz,75
 palabra,75
 costar,75
 terminar,74
+charla,73
+ayudar,72
 obviamente,72
 vuelta,72
-mostrar,71
-comprar,70
+intentar,70
 perder,69
-ayudar,69
 gana,69
 malo,69
-dar él,69
 edad,69
 sentar,68
 nena,67
 conocer,67
 amar,67
-intentar,67
 social,66
 tanto,66
 cuerpo,66
+disfrutar,66
 niña,66
+resolver,65
 entrar,64
 diferencia,64
 foto,63
 feliz,63
 fuerte,63
 tocar,63
+encontrar,63
+rol,63
 producto,63
-rol,61
-charla,61
 tratamiento,60
 lindo,60
 colegio,60
@@ -170,35 +171,36 @@ poquito,60
 estár,60
 hombre,60
 vos,59
-resolver,59
+charlar,59
 viejo,59
 distinto,57
 forma,57
+agarrar,57
+super,57
 vas,57
 decisión,57
 digital,57
+enseñar,57
 generar,57
-disfrutar,57
 mandar,56
-super,56
 tadeo,56
 positivo,56
-charlar,56
 jurar,55
+despertar,55
 trabajo,55
 pie,54
 alguien,54
-encontrar,54
 golpe,54
 respuesta,54
 tremendo,53
 adolescencia,53
 sentido,52
 listo,52
+probar,52
 pelo,51
 médico,51
 base,51
-agarrar,51
+escribir,51
 información,51
 increíble,51
 espectacular,51
@@ -209,9 +211,7 @@ vínculo,51
 paternidad,51
 desafío,51
 chica,49
-probar,49
 justo,48
-escribir,48
 muchísimo,48
 recién,48
 fruta,48
@@ -220,6 +220,7 @@ mano,48
 duda,48
 terapia,48
 estímulo,48
+pelear,47
 panza,46
 sentí,46
 desarrollo,46
@@ -228,22 +229,22 @@ libro,45
 terrible,45
 semana,45
 serio,45
-enseñar,45
 papás,45
 crisis,45
 fondo,45
 fórmula,45
 minuto,45
 baño,44
-pelear,44
-despertar,43
 quimio,42
 instagram,42
 idea,42
 proceso,42
 novio,42
+bajar,42
 suerte,42
 okay,42
+meter,42
+construir,42
 cambio,42
 importar,42
 galletita,42
@@ -260,9 +261,10 @@ lactancia,40
 justamente,39
 piso,39
 factor,39
-bajar,39
+responder,39
 criar,39
 cantidad,39
+ser,39
 menor,39
 pacer,39
 crianza,39
@@ -275,10 +277,13 @@ arrancar,38
 historia,38
 parto,38
 filipa,38
+explicar,38
+estudiar,37
 literalmente,37
 odiar,37
 mentira,37
 laburo,36
+tirar,36
 levantar,36
 ojo,36
 dijistir,36
@@ -293,16 +298,15 @@ decí,36
 viaje,36
 crees,36
 instinto,36
-construir,36
 límite,36
 cuestión,36
+leer,36
 fundamental,36
 atravesar,36
 mental,36
 youtube,36
 sinceramente,36
 hambre,35
-estudiar,34
 dalar,34
 placer,34
 rutina,34
@@ -310,21 +314,21 @@ molestar,34
 herramienta,34
 juego,34
 común,33
+creer,33
 sueño,33
 seguridad,33
 imaginar,33
 real,33
-decir él,33
 sufrir,33
 conflicto,33
 etapa,33
 afectar,33
-meter,33
 claramente,33
 permanentemente,33
 doler,33
 adolescente,33
 humano,33
+nombre,33
 medicina,33
 saludable,33
 alimento,33
@@ -333,7 +337,6 @@ cultura,33
 reels,33
 grooming,33
 ocupacional,33
-explicar,32
 conectar,31
 bañar,31
 pequeño,31
@@ -346,7 +349,6 @@ ovario,30
 esperar,30
 empiezo,30
 raro,30
-creer,30
 consultorio,30
 hermoso,30
 siquiera,30
@@ -354,22 +356,19 @@ visita,30
 olvidar,30
 par,30
 rato,30
-responder,30
 junto,30
 nivel,30
 servir,30
 chiquitito,30
 generación,30
 presente,30
-ser,30
 lejos,30
 sociedad,30
-nombre,30
 grupo,30
-dejar él,30
 caminar,30
 jugo,30
 vaca,30
+trasladar,30
 clave,30
 responsabilidad,30
 chola,29
@@ -382,11 +381,11 @@ materno,29
 come,29
 dio,28
 mamás,28
+manejar,28
 fanático,27
 emoción,27
 cámara,27
 recibir,27
-tirar,27
 favor,27
 evento,27
 joda,27
@@ -395,12 +394,11 @@ pobre,27
 buenísimo,27
 curso,27
 adentro,27
+divertir,27
 divertido,27
 sorprender,27
 contento,27
-poner él,27
 ojalá,27
-leer,27
 recomendar,27
 valor,27
 simplemente,27
@@ -420,7 +418,6 @@ primero,25
 reimportante,25
 cesárea,25
 afuero,25
-manejar,25
 sepa,25
 preocupar,25
 pintado,25
@@ -445,11 +442,9 @@ razón,24
 acompañamiento,24
 club,24
 auto,24
-divertir,24
 cumplir,24
 mensaje,24
 clase,24
-sacar él,24
 rápido,24
 sensación,24
 paso,24
@@ -463,6 +458,7 @@ batalla,24
 compra,24
 riesgo,24
 hospital,24
+usar,24
 habitación,24
 registro,24
 actividad,24
@@ -485,6 +481,7 @@ turbante,21
 aires,21
 resultar,21
 básicamente,21
+matar,21
 época,21
 podés,21
 color,21
@@ -501,12 +498,15 @@ juro,21
 comentario,21
 caca,21
 coincidir,21
+aceptar,21
 corazón,21
 juzgar,21
 opinión,21
 valer,21
 superar,21
+nutrir,21
 paquete,21
+correr,21
 fácil,21
 azúcar,21
 interesante,21
@@ -519,13 +519,12 @@ enfermo,21
 pensamiento,21
 película,21
 sentado,21
-usar,21
 mil,21
 físico,21
-hacer él,21
 parar,21
 heavy,21
 ciudad,21
+acercar,21
 crecer,21
 capacidad,21
 contacto,21
@@ -534,12 +533,14 @@ considerar,20
 consumir,20
 angustia,20
 casar,20
-correr,20
 negativo,20
+reir,20
+preparar,20
 saqué,19
 funcionar,19
 verdura,19
 pibe,19
+transmitir,19
 sentimiento,19
 exacto,19
 fíjate,19
@@ -553,14 +554,13 @@ lunes,18
 mono,18
 energía,18
 imagen,18
-poner yo,18
 óvulo,18
-matar,18
 emocionar,18
 retar,18
 pedo,18
 profesional,18
 vulnerable,18
+lavar,18
 mayoría,18
 cosita,18
 bailar,18
@@ -582,11 +582,10 @@ fiebre,18
 sexual,18
 atención,18
 identificar,18
-ver él,18
 mirada,18
-transmitir,18
 exposición,18
 fluir,18
+obligar,18
 deseo,18
 permitir,18
 lastimar,18
@@ -608,9 +607,9 @@ bienestar,18
 contestar,18
 carga,18
 sistema,18
-acercar,18
 espacio,18
 regalo,18
+relacionar,18
 egipto,18
 padecer,18
 mente,18
@@ -618,16 +617,17 @@ paula,18
 oli,18
 publico,18
 presencia,18
-preparar,18
 sostener,18
 cotidiano,18
 pipe,18
 farmacia,18
 empeza,17
 operar,17
+frenar,17
 estuvir,17
 nacido,17
 dios,17
+guardar,17
 ves,17
 pintar,17
 peluca,16
@@ -649,6 +649,7 @@ computadora,16
 inteligencia,16
 quilombo,16
 chao,16
+amigar,15
 detectar,15
 personal,15
 pleno,15
@@ -660,6 +661,7 @@ subir,15
 impresionante,15
 ocupar,15
 cerrar,15
+convertir,15
 sentís,15
 consciente,15
 depender,15
@@ -681,18 +683,15 @@ alcohol,15
 pis,15
 pico,15
 compañero,15
+expresar,15
 upa,15
 dinámica,15
-aceptar,15
-hablar él,15
-tener él,15
 cómodo,15
 puntual,15
 paterno,15
 frente,15
 viví,15
 golpear,15
-obligar,15
 durar,15
 etcétera,15
 repetir,15
@@ -706,7 +705,6 @@ transitar,15
 exigente,15
 equilibrio,15
 alimentar,15
-nutrir,15
 apostar,15
 profesión,15
 gaseosa,15
@@ -715,18 +713,18 @@ trastorno,15
 rico,15
 echar,15
 curar,15
-trasladar,15
 básico,15
 calle,15
 inevitable,15
-mostrar él,15
 ansiedad,15
+incorporar,15
 argentino,15
 dolor,15
 armar,15
 mamadera,15
 colecho,15
 aprendizaje,15
+quitar,15
 calentar,15
 combi,15
 intento,15
@@ -734,11 +732,11 @@ negar,15
 serie,15
 sumar,15
 solución,15
+dibujar,15
 propósito,15
 atento,15
 germán,15
 contrario,15
-trasladar él,15
 independencia,15
 borro,15
 peluch,15
@@ -746,17 +744,17 @@ sensorial,15
 consulta,15
 metáfora,15
 abrazo,15
-frenar,14
 cortar,14
 pibir,14
 familiar,14
-guardar,14
 busca,14
 bienvenido,14
 vivo,14
+diferenciar,14
 enterar,14
 hablábar,14
 maca,14
+morir,13
 disfruter,13
 lado,13
 desear,13
@@ -776,13 +774,12 @@ moda,12
 arranqué,12
 diario,12
 cancha,12
-morir,12
 verano,12
 famoso,12
 usado,12
 literal,12
-convertir,12
 válido,12
+regalar,12
 sabé,12
 privilegio,12
 posibilidad,12
@@ -796,6 +793,7 @@ estés,12
 hamburguesa,12
 queso,12
 ingeniero,12
+hayas,12
 hermana,12
 chat,12
 ocurrir,12
@@ -805,7 +803,6 @@ horario,12
 postparto,12
 atender,12
 gimnasio,12
-lavar,12
 factura,12
 coso,12
 huevo,12
@@ -821,9 +818,7 @@ acerca,12
 bla,12
 frase,12
 sol,12
-expresar,12
 prioridad,12
-acompañar él,12
 boca,12
 pelea,12
 luna,12
@@ -835,12 +830,12 @@ devolución,12
 humor,12
 crianzar,12
 referís,12
+verla,12
 suponer,12
 des,12
 absoluto,12
 directamente,12
 emocional,12
-enseñar él,12
 mínimo,12
 vivencia,12
 deber,12
@@ -855,6 +850,7 @@ manera,12
 error,12
 soñé,12
 sexualidad,12
+comentar,12
 creser,12
 notar,12
 casado,12
@@ -874,6 +870,7 @@ cortisol,12
 helado,12
 recuerdo,12
 combinación,12
+unir,12
 selectividad,12
 infantil,12
 reparar,12
@@ -889,11 +886,9 @@ respirar,12
 cristal,12
 dibujito,12
 nenir,12
-incorporar,12
 salvar,12
 faja,12
 usé,12
-reir,12
 emocionalmente,12
 dormido,12
 gritar,12
@@ -907,12 +902,10 @@ cabo,12
 artificial,12
 público,12
 perfil,12
-quitar,12
 recital,12
 cansar,12
 mejorar,12
 bolsillo,12
-char él,12
 secundario,12
 sesión,12
 whatsapp,12
@@ -927,14 +920,16 @@ correcto,12
 salida,12
 aclarar,12
 partido,12
-dibujar,12
+comunicar,12
 conversar,12
 patear,12
 mar,12
 cagada,12
+aportar,12
 carro,12
 haz,12
 principal,12
+controlar,12
 posta,12
 roto,12
 asustar,12
@@ -945,8 +940,6 @@ organizar,12
 mito,12
 galleta,12
 picar,12
-cambiar él,12
-amigar,11
 volví,11
 disfruté,11
 afuerar,11
@@ -956,10 +949,12 @@ complicar,11
 disfrute,11
 profundizar,11
 visto,11
+demorar,11
 decía,11
+acostumbrar,11
 auténtico,10
-hayas,10
 boluda,10
+queres,10
 cirir,10
 divino,10
 aprendar,10
@@ -988,6 +983,7 @@ agresor,10
 reto,10
 ruso,9
 personaje,9
+vestir,9
 hinchar,9
 domingo,9
 atrás,9
@@ -999,11 +995,9 @@ showroom,9
 operación,9
 valijita,9
 cerrado,9
-pasar él,9
 poquitito,9
 personalidad,9
 conocí,9
-regalar,9
 jamás,9
 probabilidad,9
 plan,9
@@ -1059,7 +1053,6 @@ alma,9
 temón,9
 toque,9
 moco,9
-llamar él,9
 fantástico,9
 matrimonio,9
 impacto,9
@@ -1071,15 +1064,15 @@ celo,9
 boludez,9
 detalle,9
 traumático,9
-ser él,9
 permisivo,9
 nat,9
 doble,9
 proyecto,9
+extender,9
 amoroso,9
 joven,9
 nervioso,9
-comentar,9
+inculcar,9
 pilar,9
 consecuencia,9
 flor,9
@@ -1094,17 +1087,16 @@ hablaste,9
 perdido,9
 psicólogo,9
 encargar,9
+invitar,9
 adelantar,9
 perro,9
 pensado,9
 ratito,9
 permanente,9
 doc,9
-comprar él,9
 nombrar,9
 hormona,9
 pedazo,9
-buscar él,9
 soltar,9
 mir,9
 almuerzo,9
@@ -1112,7 +1104,6 @@ cena,9
 variado,9
 tranquilidad,9
 vara,9
-unir,9
 probado,9
 selectivo,9
 desesperar,9
@@ -1122,14 +1113,12 @@ concentración,9
 internet,9
 medioambiental,9
 autismo,9
-encontrar él,9
 país,9
 componente,9
 simple,9
 restaurant,9
 robar,9
 peligroso,9
-preguntar él,9
 vayar,9
 cólico,9
 anécdota,9
@@ -1147,7 +1136,6 @@ diente,9
 pijama,9
 escalera,9
 hotel,9
-quedar yo,9
 especie,9
 aguantar,9
 reflejo,9
@@ -1174,7 +1162,6 @@ saca,9
 intención,9
 invitado,9
 instalar,9
-leer él,9
 vibrar,9
 vibración,9
 reacción,9
@@ -1182,6 +1169,7 @@ beso,9
 pornografía,9
 compañía,9
 bolich,9
+cuestionar,9
 ecosistema,9
 altura,9
 estadísticamente,9
@@ -1203,7 +1191,6 @@ extremo,9
 caés,9
 contame,9
 gusto,9
-relacionar él,9
 trabajer,9
 captar,9
 constante,9
@@ -1224,7 +1211,6 @@ intimidad,9
 corregir,9
 compañerito,9
 discusión,9
-disfrutar él,9
 ilusión,9
 regla,9
 orgulloso,9
@@ -1233,7 +1219,7 @@ chivo,9
 extra,9
 muerte,9
 diriar,9
-aportar,9
+atraer,9
 rebelde,9
 frío,9
 metido,9
@@ -1243,7 +1229,6 @@ rasgo,9
 vivido,9
 bife,9
 trauma,9
-controlar,9
 papis,9
 inferior,9
 esperable,9
@@ -1273,11 +1258,9 @@ enteer,9
 cre,9
 pinchazo,9
 rojo,9
-vivir él,9
 auxilio,9
 pera,9
 puerperio,9
-verla,9
 pupilo,9
 revolear,9
 preferencia,9
@@ -1296,12 +1279,9 @@ pensass,8
 hicimo,8
 lucha,8
 legumbr,8
-diferenciar,8
-demorar,8
 avisar,8
 desarrollar,8
 atrapa,8
-acostumbrar,8
 comprobado,8
 primario,8
 habilidad,8
@@ -1311,8 +1291,7 @@ bronco,7
 convencer,7
 partir,7
 dormíar,7
-queres,7
-ponelir,7
+criticar,7
 guardia,7
 contenido,7
 berrinch,7
@@ -1326,20 +1305,23 @@ acabas,7
 terapiar,7
 comíar,7
 amiguita,7
+tranquilizar,7
 digar,7
 enojar,7
 pantallar,7
 acompañado,7
 pediatra,7
 mirándolo,7
+mover,7
 vieja,7
 potenciar,7
 atrapar,7
 contactar,7
-mirar él,7
 estudiante,7
 enseñir,7
 zeu,7
+vincular,7
+cagar,7
 quisimos,7
 cuidser,7
 aceite,7
@@ -1367,7 +1349,6 @@ socia,6
 tapado,6
 tirado,6
 belleza,6
-tirar yo,6
 ánimo,6
 cocido,6
 asumir,6
@@ -1391,7 +1372,7 @@ siro,6
 control,6
 oncología,6
 subíar,6
-hacer yo,6
+visitar,6
 análisis,6
 tranquilar,6
 rosa,6
@@ -1430,7 +1411,6 @@ valla,6
 leo,6
 variar,6
 juicio,6
-ir yo,6
 culo,6
 tajo,6
 toallita,6
@@ -1484,6 +1464,7 @@ pongo,6
 impresión,6
 objeto,6
 lidiar,6
+procrear,6
 episodio,6
 ponete,6
 quedastar,6
@@ -1493,8 +1474,6 @@ modelo,6
 flashar,6
 ejercer,6
 zarpado,6
-dar yo,6
-explicar él,6
 experimentar,6
 hereditario,6
 típica,6
@@ -1510,14 +1489,11 @@ tarea,6
 medida,6
 escolaridad,6
 generalmente,6
-extender,6
 acomodar,6
 diálogo,6
 dañar,6
 juzgamiento,6
 mapernidad,6
-contar él,6
-escuchar él,6
 acción,6
 escuche,6
 psicológico,6
@@ -1534,7 +1510,6 @@ ritmo,6
 típico,6
 tengar,6
 tercer,6
-inculcar,6
 distir,6
 amistad,6
 puntualmente,6
@@ -1563,7 +1538,6 @@ pensás,6
 longevidad,6
 fuertemente,6
 ligado,6
-nutrir él,6
 plazo,6
 pata,6
 lista,6
@@ -1576,7 +1550,6 @@ completamente,6
 gaseós,6
 hueco,6
 cubrir,6
-meter yo,6
 líquido,6
 adicción,6
 veneno,6
@@ -1655,11 +1628,10 @@ automáticamente,6
 eventualmente,6
 durermar,6
 loop,6
-reir él,6
 odio,6
 físicamente,6
-vestir,6
 limpiar,6
+chocar,6
 cansancio,6
 directo,6
 basinet,6
@@ -1671,7 +1643,6 @@ llamado,6
 conectado,6
 acelerado,6
 primerizo,6
-sentir él,6
 italia,6
 empecer,6
 enganchar,6
@@ -1733,7 +1704,6 @@ determinado,6
 leía,6
 charler,6
 analítico,6
-cuestionar,6
 procesar,6
 adultez,6
 entrevista,6
@@ -1757,7 +1727,6 @@ arma,6
 delincuente,6
 taxatividad,6
 desgaste,6
-invitar,6
 derecho,6
 enojo,6
 incapacidad,6
@@ -1777,6 +1746,7 @@ caber,6
 producción,6
 preciso,6
 pandemia,6
+subestimar,6
 aire,6
 kids,6
 resuelto,6
@@ -1790,7 +1760,6 @@ lógica,6
 engranar,6
 agarro,6
 alegrar,6
-comunicar,6
 admiración,6
 construcción,6
 costado,6
@@ -1804,6 +1773,7 @@ sentiar,6
 afecto,6
 tramito,6
 cantar,6
+amacar,6
 carácter,6
 berrinche,6
 efímero,6
@@ -1812,7 +1782,6 @@ individual,6
 lloro,6
 pendiente,6
 rodear,6
-resolver él,6
 resoplido,6
 actual,6
 necesariamente,6
@@ -1820,8 +1789,6 @@ pelotudear,6
 admiro,6
 infinito,6
 debate,6
-relacionar yo,6
-llevar él,6
 queré,6
 arena,6
 tajante,6
@@ -1831,12 +1798,9 @@ aumentar,6
 periodismo,6
 diado,6
 pasivo,6
-aceptar él,6
 mayordomo,6
-atraer,6
 totalment,6
 padr,6
-diferenciar él,6
 comportamiento,6
 enogir,6
 percibo,6
@@ -1856,7 +1820,9 @@ inteligente,6
 interacción,6
 concretar,6
 tumbo,6
+empujar,6
 caretear,6
+romantizar,6
 formar,6
 logrer,6
 burbuja,6
@@ -1894,7 +1860,6 @@ repetido,6
 favorecer,6
 modal,6
 apego,6
-construir él,6
 ketchup,6
 ancla,6
 gorda,6
@@ -1913,8 +1878,6 @@ animar,6
 gilada,6
 cabida,6
 mari,6
-despertar yo,6
-despertar él,6
 sorry,6
 trancu,6
 tapa,6
@@ -1923,17 +1886,15 @@ llegábar,6
 asado,6
 agarré,6
 esconder,6
-responder él,6
 jodida,6
 relativamente,6
-agarrar él,6
 justificado,6
 volvés,6
 intuitivo,6
 reaccionar,6
+ordenar,6
 desplazado,6
 favorito,6
-comunicar él,6
 fluidez,6
 olvido,6
 estructurado,6
@@ -1989,6 +1950,7 @@ acomoda,5
 vean,5
 elegí,5
 reloca,5
+distraer,4
 hicistar,4
 encerrar,4
 chiquita,4
@@ -1996,7 +1958,6 @@ venitir,4
 postre,4
 comidir,4
 frisado,4
-criticar,4
 corporalmente,4
 estuvistar,4
 loca,4
@@ -2017,8 +1978,8 @@ siente,4
 estuvimos,4
 repetirte,4
 angustiado,4
+quieras,4
 trato,4
-hacer tú,4
 imagina,4
 disfrutir,4
 innecesario,4
@@ -2038,7 +1999,6 @@ sociana,4
 senta,4
 década,4
 cosar,4
-mover,4
 llevé,4
 descartabl,4
 probé,4
@@ -2047,7 +2007,6 @@ culpar,4
 contarme,4
 alfombra,4
 asociado,4
-amigar yo,4
 saque,4
 equivocar,4
 mier,4
@@ -2072,11 +2031,9 @@ concreto,4
 deja,4
 encontrastar,4
 cabezar,4
-tranquilizar,4
 adolescenciar,4
 amiguitar,4
 remitir,4
-cagar,4
 salar,4
 hambrir,4
 relocar,4
@@ -2108,7 +2065,6 @@ crismo,3
 disponible,3
 cort,3
 cortito,3
-vestir yo,3
 tirada,3
 juventud,3
 camisa,3
@@ -2137,7 +2093,6 @@ vendido,3
 desperté,3
 comprarte,3
 bina,3
-matar yo,3
 entretenimiento,3
 oncóloga,3
 quimion,3
@@ -2159,7 +2114,6 @@ mostra,3
 preguntándome,3
 retrospectivo,3
 introspectiva,3
-ver yo,3
 crokir,3
 lograstir,3
 ocupándote,3
@@ -2191,7 +2145,6 @@ conservar,3
 preservar,3
 procedimiento,3
 bárico,3
-creer él,3
 ficción,3
 recubrir,3
 recurrir,3
@@ -2238,7 +2191,6 @@ bromeábamos,3
 ascensor,3
 laquimio,3
 chocho,3
-visitar,3
 médica,3
 enfermero,3
 cardíaco,3
@@ -2275,7 +2227,6 @@ mimo,3
 verme,3
 bizarro,3
 brownie,3
-visitar yo,3
 recibo,3
 adaptar,3
 rar,3
@@ -2323,7 +2274,7 @@ vaía,3
 entrada,3
 desubicado,3
 click,3
-contradecir él,3
+contradecir,3
 tir,3
 explotado,3
 tenar,3
@@ -2362,8 +2313,7 @@ inmaduro,3
 chonguear,3
 madurar,3
 enviar,3
-responder yo,3
-largar él,3
+largar,3
 són,3
 callado,3
 muchacho,3
@@ -2378,7 +2328,6 @@ costumbre,3
 modos,3
 superpetuoso,3
 responderem,3
-pelir,3
 decme,3
 crianzo,3
 espontáneo,3
@@ -2451,13 +2400,11 @@ chismecito,3
 preguntándotar,3
 mandito,3
 calor,3
-quedar él,3
 juzgues,3
 milanensa,3
 cocino,3
 cuadr,3
 bolón,3
-caer yo,3
 sentiste,3
 mama,3
 refasar,3
@@ -2467,7 +2414,6 @@ trámito,3
 duermo,3
 living,3
 seguidito,3
-procrear,3
 convenatorio,3
 esperees,3
 avísame,3
@@ -2492,7 +2438,6 @@ amá,3
 repita,3
 autoridad,3
 meistar,3
-haber él,3
 pegado,3
 menti,3
 tocaste,3
@@ -2514,12 +2459,10 @@ acuerdo,3
 rediviertar,3
 actriz,3
 redivertido,3
-obligar él,3
 transmita,3
 renotar,3
 reequipo,3
 identifica,3
-charlar él,3
 soportar,3
 límitar,3
 amorosamente,3
@@ -2552,13 +2495,13 @@ primeracer,3
 vivamos,3
 repentinamente,3
 recomendas,3
-concebir él,3
+concebir,3
 pensaba,3
 deseaba,3
 imaginabas,3
 increíblemente,3
 angustio,3
-comprender él,3
+comprender,3
 lógicamente,3
 ped,3
 creíst,3
@@ -2570,17 +2513,14 @@ expli,3
 similar,3
 humilde,3
 esfuerzo,3
-inculcar él,3
 solidario,3
 piráma,3
 nombrás,3
 amamos,3
 cotillón,3
 tierra,3
-nombre ,3
 autoestima,3
 letra,3
-sentir yo,3
 superficial,3
 redondee,3
 sea,3
@@ -2602,7 +2542,7 @@ renuna,3
 exigís,3
 falencia,3
 autoexijo,3
-autoexigir yo,3
+autoexigir,3
 pulsada,3
 malestar,3
 pulgar,3
@@ -2625,14 +2565,12 @@ emocionaste,3
 grós,3
 doctor,3
 fernández,3
-invitar yo,3
 nuevamente,3
 yoismo,3
 kpop,3
 paralelo,3
 resumistir,3
 pelotita,3
-comer él,3
 nutrirlo,3
 redoblacer,3
 evolucionar,3
@@ -2660,7 +2598,7 @@ burbujita,3
 alarmant,3
 engañoso,3
 hidratado,3
-hidratar él,3
+hidratar,3
 estrés,3
 manejado,3
 flipar,3
@@ -2683,7 +2621,6 @@ sembrass,3
 ladería,3
 ahorra,3
 consulterio,3
-tranquilizar él,3
 tiasa,3
 mandato,3
 inalcanzable,3
@@ -2726,7 +2663,6 @@ avalar,3
 polémica,3
 aval,3
 científico,3
-ayudar él,3
 lucrar,3
 multifactorial,3
 químico,3
@@ -2786,7 +2722,6 @@ perdimo,3
 vegetal,3
 dividido,3
 micronutrient,3
-incorporar él,3
 controlado,3
 aditivo,3
 pasteurizado,3
@@ -2806,8 +2741,7 @@ criamos,3
 primeriza,3
 remo,3
 perra,3
-esperando yo,3
-extender él,3
+esperando,3
 existí,3
 dolorido,3
 guerra,3
@@ -2843,7 +2777,6 @@ stretch,3
 gloria,3
 comprate,3
 raspar,3
-probar él,3
 metiéndote,3
 pregúntenmar,3
 blackout,3
@@ -2872,7 +2805,6 @@ pueblo,3
 acorralar,3
 sobreistimular,3
 flujo,3
-bajar él,3
 estimular,3
 excesivamente,3
 incidente,3
@@ -2880,14 +2812,13 @@ facilidad,3
 practicidad,3
 enroscar,3
 dámelar,3
-facilitar él,3
+facilitar,3
 tieta,3
 hondar,3
 actancia,3
 confusión,3
 confuso,3
 lavarte,3
-lavar yo,3
 pijamita,3
 botón,3
 agotado,3
@@ -2902,7 +2833,6 @@ conseguir,3
 pulserita,3
 gomita,3
 marié,3
-distraer,3
 puse,3
 pausa,3
 recansado,3
@@ -2918,19 +2848,17 @@ cortina,3
 amojado,3
 resolvía,3
 sonar,3
-chocar,3
 colechir,3
 perocho,3
 cocho,3
-aplastar él,3
+aplastar,3
 uncito,3
 dormida,3
 camita,3
 dormí,3
 swadle,3
-envolver él,3
+envolver,3
 momia,3
-mover él,3
 moro,3
 swader,3
 tutorial,3
@@ -2961,7 +2889,7 @@ enter,3
 parada,3
 dejéos,3
 presionar,3
-disfrutando él,3
+disfrutando,3
 grupal,3
 verborrágico,3
 podcast,3
@@ -2978,7 +2906,6 @@ verrorico,3
 graciosa,3
 volvé,3
 rookis,3
-dormir él,3
 olvidamos,3
 venerar,3
 llámame,3
@@ -2988,7 +2915,7 @@ contándono,3
 pensár,3
 mandir,3
 mail,3
-conectando él,3
+conectando,3
 comunidad,3
 apoyado,3
 imaginábar,3
@@ -3063,7 +2990,6 @@ llevastir,3
 sinceridad,3
 hero,3
 cuchillo,3
-ner,3
 obse,3
 flexibilidad,3
 respeté,3
@@ -3077,7 +3003,6 @@ actualización,3
 epílogo,3
 epilogo,3
 significado,3
-escribir él,3
 vitu,3
 influenciar,3
 garwulski,3
@@ -3089,7 +3014,6 @@ outsiders,3
 outer,3
 darme,3
 precargada,3
-aprender él,3
 bardo,3
 privacidad,3
 parenting,3
@@ -3111,7 +3035,6 @@ gestual,3
 pierdo,3
 elijo,3
 eliminer,3
-quitar él,3
 far,3
 sáquensela,3
 acariciar,3
@@ -3144,7 +3067,6 @@ córdoba,3
 chóer,3
 orador,3
 chófer,3
-sción,3
 servicio,3
 ruta,3
 aburrir,3
@@ -3167,24 +3089,21 @@ desinhibición,3
 aversión,3
 bolicho,3
 baila,3
-estimu él,3
+estimu,3
 sig,3
 publicidad,3
 unidos,3
 charlaste,3
-manejar él,3
 haarar,3
 neurodesarrollo,3
 instancia,3
 políticamente,3
 debeer,3
-cuestionar él,3
 agresivo,3
 malintencionado,3
 sexo,3
 agrego,3
 tecnológico,3
-demorar él,3
 desaparezcar,3
 enamorar,3
 jugábar,3
@@ -3278,7 +3197,6 @@ note,3
 startup,3
 consultoría,3
 navegación,3
-estudiar él,3
 fin,3
 perverso,3
 érár,3
@@ -3326,7 +3244,6 @@ brumy,3
 ahorito,3
 piesaya,3
 precisión,3
-trabajar él,3
 gromi,3
 mayor,3
 ludopateía,3
@@ -3335,7 +3252,7 @@ fenómeno,3
 recontradicto,3
 escuchaba,3
 armado,3
-capturar él,3
+capturar,3
 gamificación,3
 app,3
 notificación,3
@@ -3351,15 +3268,13 @@ pestar,3
 recontraudar,3
 confesar,3
 intencionado,3
-subestimar,3
 sei,3
 tecir,3
 problemar,3
 robótico,3
 tecno,3
-relacionar,3
 peligro,3
-refaci él,3
+refaci,3
 apagar,3
 cuidándono,3
 cotidianamente,3
@@ -3395,6 +3310,7 @@ azar,3
 indiscriminadamente,3
 tendré,3
 mezclar,3
+videítos,3
 curado,3
 preadolescente,3
 netflix,3
@@ -3429,7 +3345,6 @@ temaeta,3
 levantabar,3
 culpo,3
 remar,3
-frenar él,3
 patita,3
 chiquitita,3
 testículo,3
@@ -3439,12 +3354,10 @@ escena,3
 inmensamente,3
 demagogia,3
 momentito,3
-amacar,3
 alegría,3
 mutar,3
 efectivo,3
 tríada,3
-unir él,3
 recuperar,3
 enferma,3
 temblar,3
@@ -3455,12 +3368,9 @@ sacadito,3
 enfermar,3
 livia,3
 inquietar,3
-vincular él,3
-caer él,3
 silla,3
 rápidamente,3
 posterior,3
-comentar él,3
 corregime,3
 consenso,3
 instalado,3
@@ -3469,7 +3379,7 @@ proyectar,3
 aluvión,3
 escrita,3
 puesta,3
-enfocar yo,3
+enfocar,3
 melancolía,3
 replanteo,3
 admirar,3
@@ -3495,7 +3405,6 @@ injusto,3
 mostré,3
 bala,3
 cometer,3
-decir yo,3
 mostrándoselo,3
 individualmente,3
 entro,3
@@ -3536,13 +3445,11 @@ destratar,3
 gráfico,3
 encomienda,3
 tuvierar,3
-meter él,3
 freud,3
 inacción,3
 registrastar,3
 afectivo,3
-despintar él,3
-dibujar él,3
+despintar,3
 culpós,3
 chino,3
 gestito,3
@@ -3551,7 +3458,6 @@ ubicar,3
 diciéndome,3
 urquilla,3
 atípico,3
-atraer él,3
 vendaval,3
 sobrepensar,3
 adelantado,3
@@ -3574,7 +3480,6 @@ cuestionamiento,3
 voraz,3
 trasar,3
 pequeñez,3
-vincular,3
 convivo,3
 arraigado,3
 intenta,3
@@ -3607,7 +3512,6 @@ tien,3
 pon,3
 sapolor,3
 toxito,3
-saber él,3
 canción,3
 observar,3
 observador,3
@@ -3622,38 +3526,29 @@ obtinado,3
 nacimiento,3
 quirombero,3
 caprichoso,3
-chocar él,3
 pelota,3
 bruta,3
 motricidad,3
 fino,3
 verbalizar,3
-expresar él,3
 intuyo,3
 manipulación,3
 temprano,3
 paola,3
-lavar él,3
 solté,3
 chuflín,3
 espalda,3
 chiquitaje,3
 cercano,3
-acercar yo,3
 timidez,3
 desenvolver,3
 evolucioné,3
 imaginé,3
-acostumbrar yo,3
 pérdida,3
 argumento,3
-empujar,3
 motivo,3
-controlar él,3
 disgusto,3
 cheo,3
-romantizar él,3
-romantizar,3
 espantoso,3
 suspiro,3
 reconciliado,3
@@ -3666,7 +3561,6 @@ diga,3
 zanahorio,3
 sanar,3
 rotura,3
-transitar él él,3
 traslar,3
 hipócrita,3
 discurso,3
@@ -3716,7 +3610,6 @@ específico,3
 significativo,3
 honesto,3
 transparente,3
-intentar él,3
 influir,3
 defecto,3
 actitud,3
@@ -3730,13 +3623,12 @@ entrevistar,3
 empoderar,3
 terapista,3
 terapeuta,3
-definir él,3
+definir,3
 bajado,3
 decirte,3
 quieto,3
 atar,3
 cordón,3
-ayudar tú,3
 inodoro,3
 juzgada,3
 pum,3
@@ -3747,7 +3639,6 @@ naturalizar,3
 animás,3
 sticker,3
 ninodoro,3
-sacar yo,3
 trabajamos,3
 habilitar,3
 post,3
@@ -3758,8 +3649,7 @@ odiado,3
 separación,3
 philip,3
 asegurar,3
-usar él,3
-autorregular él,3
+autorregular,3
 visual,3
 pérez,3
 quisir,3
@@ -3779,7 +3669,7 @@ enloquecer,3
 adentrar,3
 fideíto,3
 pecar,3
-enchufar él,3
+enchufar,3
 encara,3
 tientar,3
 estudiaste,3
@@ -3798,7 +3688,6 @@ obligarlo,3
 corporal,3
 registrar,3
 encaramos,3
-guardar él,3
 abordaje,3
 forzar,3
 lema,3
@@ -3818,7 +3707,6 @@ querrir,3
 alfajor,3
 interferido,3
 picnic,3
-divertir él,3
 borrar,3
 ordenado,3
 jodar,3
@@ -3841,7 +3729,6 @@ succionar,3
 oral,3
 premasticación,3
 determinar,3
-decir tú,3
 frescir,3
 extractor,3
 comierar,3
@@ -3863,7 +3750,7 @@ criterio,3
 lineal,3
 interpretar,3
 pauta,3
-abstraer él,3
+abstraer,3
 adorar,3
 chiquitina,3
 aupar,3
@@ -3880,7 +3767,6 @@ quinesiología,3
 incrédulo,3
 ocupación,3
 primordial,3
-subestimar él,3
 terapéutico,3
 acompañarla,3
 ahy,3
@@ -3956,7 +3842,6 @@ criemo,3
 intro,3
 charl,3
 implicar,3
-convertir él,3
 imaginastar,3
 imaginaste,3
 pelpa,3
@@ -4021,12 +3906,10 @@ cosmeto,3
 reansioso,3
 subitir,3
 destino,3
-queres ,3
 lindar,3
 confirmar,3
 valo,3
 llega,3
-entender él,3
 paternal,3
 problemita,3
 estómago,3
@@ -4054,11 +3937,7 @@ cco,3
 egresado,3
 aclararte,3
 reina,3
-ordenar yo,3
-ordenar él,3
-procrear él,3
 ayornar,3
-criticar él,3
 órgano,3
 iba,3
 saltar,3
@@ -4090,7 +3969,7 @@ puerterio,3
 embarques,3
 aventura,3
 embarcándote,3
-embarcar él,3
+embarcar,3
 incertidumbre,3
 toqué,3
 pantalón,3
@@ -4106,26 +3985,22 @@ pes,3
 champú,3
 coche,3
 asco,3
-amacar él,3
 sangrar,3
 nariz,3
-empujar él,3
 pobrec,3
 terri,3
-regalar él,3
 educado,3
 milar,3
 apropiado,3
 diciéndolo,3
 analizalo,3
 elijar,3
-aportar él,3
-pelear yo,3
 boludarme,3
 resumen,3
 interés,3
 desbloquear,3
 conect,3
+disfrut,3
 separar,3
 sílaba,3
 dri,3
@@ -4148,10 +4023,10 @@ decime,3
 deprimir,3
 peleé,3
 pelees,3
-joder él,3
+joder,3
 irónico,3
 sarcástico,3
-reduelir,3
+redue,3
 jodeir,3
 ilusioné,3
 alzar,3
@@ -4168,9 +4043,7 @@ homero,3
 tristeza,3
 internono,3
 internar,3
-cagar él,3
 atrompada,3
-tirar él,3
 muffin,3
 beige,3
 luchaber,3
@@ -4248,18 +4121,15 @@ criado,2
 tranca,2
 semejanzar,2
 juzgadir,2
-co él,2
 sepo,2
 pobrecitar,2
 repetirtir,2
 angustiada,2
 parez,2
-quieras ,2
 ustetro,2
 preguntarte,2
 tratamo,2
 amerita,2
-quieras,2
 llevó,2
 innecesaria,2
 dartir,2
@@ -4300,7 +4170,7 @@ pasándola,2
 movía,2
 cesárear,2
 fantas,2
-descartab él,2
+descartab,2
 usastar,2
 viceversa,2
 cremo,2
@@ -4316,7 +4186,6 @@ apartir,2
 marir,2
 incluido,2
 empecé,2
-contar yo,2
 empezamos,2
 alfombrar,2
 rebásicir,2
@@ -4360,16 +4229,15 @@ potencio,2
 llamabai,2
 llamser,2
 contacta,2
-agresores ,2
+agresores,2
 videos,2
 masturben,2
 abusada,2
-habras ,2
+habras,2
 pase,2
 estudiant,2
 empatar,2
 cochado,2
-reir yo,2
 enseñamo,2
 línear,2
 abro,2
@@ -4379,12 +4247,11 @@ dijimo,2
 zeus,2
 jugarlo,2
 higir,2
-videítos,2
 criatuito,2
 protagonismir,2
 dormirme,2
 dormiar,2
-duer yo,2
+duer,2
 vincularme,2
 esposar,2
 guardiar,2
@@ -4402,7 +4269,6 @@ departamentir,2
 consegir,2
 ponele,2
 encontraste,2
-rol ,2
 tranquiliza,2
 enoja,2
 tonir,2
@@ -4416,9 +4282,7 @@ resignificaste,2
 remito,2
 inteligenciar,2
 soltaste,2
-preparar yo,2
 prar,2
-hayas ,2
 comidar,2
 caga,2
 herido,2
@@ -4464,7 +4328,7 @@ escuchamir,2
 imagín,2
 cochecitir,2
 cuid,2
-demore ,2
+demore,2
 concentras,2
 investigué,2
 tiritar,2
@@ -4482,24 +4346,22 @@ necesito,2
 deseado,2
 aceitar,2
 conecta,2
-disfrut,2
 hablado,2
 chistir,2
-extrañe ,2
+extrañe,2
 odia,2
 mentirar,2
 interner,2
-embo él,2
+embo,2
 nenar,2
 emprendedora,1
-cho él,1
+cho,1
 kiosquitos,1
 pelazo,1
 presta,1
 pusiste,1
 empezas,1
 editar,1
-distraer yo,1
 vendar,1
 pastilla,1
 truncado,1
@@ -4510,12 +4372,10 @@ volviste,1
 urbana,1
 temitir,1
 tadeir,1
-ay ,1
 tailandio,1
 cohíbir,1
 trancar,1
 crecistar,1
-transmitir él,1
 resolvemo,1
 construyen,1
 semejanzas,1
@@ -4524,8 +4384,6 @@ consumimo,1
 pensaste,1
 sentamo,1
 pensas,1
-super ,1
-preguntar tú,1
 ameritir,1
 consider,1
 rodeado,1
@@ -4550,10 +4408,9 @@ quieres,1
 nombrastir,1
 fíjatar,1
 abandoná,1
-fijar tú,1
 legumbres,1
 transitoria,1
-mirando él,1
+mirando,1
 pasándolo,1
 usaste,1
 viceversar,1
@@ -4572,7 +4429,7 @@ bye,1
 confluencia,1
 rompía,1
 hio,1
-pantal él,1
+pantal,1
 pidiéndomir,1
 durísimos,1
 pasajero,1
@@ -4595,13 +4452,11 @@ cochar,1
 reírno,1
 rangers,1
 jugarlos,1
-videíto,1
 usemos,1
 criatuita,1
 dormirmir,1
 acostumbré,1
 dormía,1
-vincular yo,1
 felicitar,1
 naciero,1
 bruscamente,1
@@ -4616,14 +4471,11 @@ soltastar,1
 prepararme,1
 prado,1
 herida,1
-transmitir él él,1
-correr yo,1
 peleo,1
 pudiste,1
 involucrarte,1
 comprobar,1
-ehir ,1
-morir yo,1
+ehir,1
 guardir,1
 acompañer,1
 flexibilizar,1
@@ -4649,8 +4501,7 @@ aviso,1
 meir,1
 colecha,1
 olvidastar,1
-elegi ,1
-disfrut ,1
+elegi,1
 dejo,1
 tuvir,1
 extrañer,1
