@@ -1,0 +1,23 @@
+{
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "/vocab-size/",
+      "permanent": false
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/vocab-size",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/vocab-size/",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/vocab-size/:path*",
+      "destination": "/:path*"
+    }
+  ]
+}
