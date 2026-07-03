@@ -1,4 +1,6 @@
 ---
+import { badge } from '../lib/hyperui';
+
 interface Props {
   estimate: number;
   knownCount: number;
@@ -8,28 +10,27 @@ interface Props {
 }
 
 const { estimate, knownCount, totalCount, level, feedback } = Astro.props;
-
 const formatted = estimate.toLocaleString('en-US');
 ---
 
 <div class="text-center">
-  <p class="text-sm font-medium uppercase tracking-wide text-stone-500">
+  <p class="text-xs font-medium tracking-wide text-gray-700 uppercase">
     Estimated vocabulary
   </p>
-  <p class="mt-2 text-5xl font-bold text-stone-900 sm:text-6xl">
+  <p class="mt-2 text-5xl font-bold text-gray-900 sm:text-6xl">
     {formatted}
   </p>
-  <p class="mt-1 text-lg text-stone-500">words</p>
+  <p class="mt-1 text-lg text-gray-500">words</p>
 
-  <div class="mt-6 inline-block rounded-full bg-amber-100 px-4 py-1.5 text-sm font-semibold text-amber-800">
-    {level}
+  <div class="mt-6">
+    <span class={badge}>{level}</span>
   </div>
 
-  <p class="mt-6 text-left text-stone-600 leading-relaxed">
+  <p class="mt-6 text-left text-sm text-gray-700 leading-relaxed">
     {feedback}
   </p>
 
-  <p class="mt-4 text-sm text-stone-400">
+  <p class="mt-4 text-xs text-gray-500">
     You marked {knownCount} of {totalCount} words as known.
   </p>
 </div>
