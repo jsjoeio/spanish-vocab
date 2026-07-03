@@ -1,0 +1,35 @@
+---
+interface Props {
+  estimate: number;
+  knownCount: number;
+  totalCount: number;
+  level: string;
+  feedback: string;
+}
+
+const { estimate, knownCount, totalCount, level, feedback } = Astro.props;
+
+const formatted = estimate.toLocaleString('en-US');
+---
+
+<div class="text-center">
+  <p class="text-sm font-medium uppercase tracking-wide text-stone-500">
+    Estimated vocabulary
+  </p>
+  <p class="mt-2 text-5xl font-bold text-stone-900 sm:text-6xl">
+    {formatted}
+  </p>
+  <p class="mt-1 text-lg text-stone-500">words</p>
+
+  <div class="mt-6 inline-block rounded-full bg-amber-100 px-4 py-1.5 text-sm font-semibold text-amber-800">
+    {level}
+  </div>
+
+  <p class="mt-6 text-left text-stone-600 leading-relaxed">
+    {feedback}
+  </p>
+
+  <p class="mt-4 text-sm text-stone-400">
+    You marked {knownCount} of {totalCount} words as known.
+  </p>
+</div>
