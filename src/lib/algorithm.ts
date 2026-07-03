@@ -76,9 +76,11 @@ export function splitIntoBands(
   const n = lemmas.length;
   if (n === 0) return [];
 
-  return Array.from({ length: bandCount }, (_, i) => {
-    const start = Math.floor((i * n) / bandCount);
-    const end = Math.floor(((i + 1) * n) / bandCount);
+  const effectiveBandCount = Math.max(1, Math.min(bandCount, n));
+
+  return Array.from({ length: effectiveBandCount }, (_, i) => {
+    const start = Math.floor((i * n) / effectiveBandCount);
+    const end = Math.floor(((i + 1) * n) / effectiveBandCount);
     return {
       index: i + 1,
       size: end - start,
@@ -138,11 +140,20 @@ export function estimateVocabulary(
 ): EstimateResult {
   const { confidenceMargin } = { ...DEFAULT_CONFIG, ...config };
 
+  if (answers.length > testWords.length) {
+    throw new Error(
+      `answers length (${answers.length}) exceeds testWords length (${testWords.length})`
+    );
+  }
+
   // group answers by band
   const bandMap = new Map<number, { bandSize: number; known: number; tested: number }>();
 
   for (let i = 0; i < answers.length; i++) {
     const word = testWords[i];
+    if (!word) {
+      throw new Error(`missing testWord at index ${i}`);
+    }
     const entry = bandMap.get(word.band) ?? {
       bandSize: word.bandSize,
       known: 0,
@@ -164,12 +175,19 @@ export function estimateVocabulary(
     }));
 
   // core formula: sum each band's size weighted by how many were known
-  const estimate = Math.round(
+  const rawEstimate = Math.round(
     bandResults.reduce((sum, b) => sum + b.bandSize * b.percentKnown, 0)
   );
 
-  const low = Math.round(estimate * (1 - confidenceMargin));
-  const high = Math.round(estimate * (1 + confidenceMargin));
+  const estimate = Math.min(Math.max(rawEstimate, 0), sourceSize);
+  const low = Math.min(
+    Math.max(Math.round(estimate * (1 - confidenceMargin)), 0),
+    sourceSize
+  );
+  const high = Math.min(
+    Math.max(Math.round(estimate * (1 + confidenceMargin)), 0),
+    sourceSize
+  );
 
   const knownCount = answers.filter(Boolean).length;
   const totalCount = answers.length;

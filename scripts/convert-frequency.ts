@@ -8,12 +8,17 @@ const SOURCE_ID = 'rioplatense-parenting';
 const SOURCE_NAME = 'Rioplatense parenting (YouTube)';
 
 const csv = readFileSync(join(import.meta.dir, '..', 'frequency.csv'), 'utf-8');
-const lines = csv.trim().split('\n').slice(1); // skip header
+const lines = csv.trim().split(/\r?\n/).slice(1); // skip header
 
-const lemmas = lines.map((line) => {
-  const [lemma, frequency] = line.split(',');
-  return { lemma, frequency: Number(frequency) };
-});
+const lemmas = lines
+  .map((line) => {
+    const [lemma, freq] = line.split(',').map((s) => s.trim());
+    const frequency = Number(freq);
+    if (!lemma || !Number.isFinite(frequency)) return null;
+    return { lemma, frequency };
+  })
+  .filter((entry): entry is { lemma: string; frequency: number } => entry !== null)
+  .sort((a, b) => b.frequency - a.frequency);
 
 const output = {
   id: SOURCE_ID,

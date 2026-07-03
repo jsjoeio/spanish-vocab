@@ -73,6 +73,18 @@ import { btnNo, btnPrimary, btnQuiet, btnSecondary, btnYes, card } from '../lib/
 
   sourceLabel.textContent = `Source: ${defaultSource.name}`;
 
+  function isValidSourceData(data: unknown): data is FrequencyListData {
+    if (!data || typeof data !== 'object') return false;
+    const record = data as FrequencyListData;
+    return (
+      Array.isArray(record.lemmas) &&
+      record.lemmas.length > 0 &&
+      record.lemmas.every(
+        (l) => typeof l.lemma === 'string' && typeof l.frequency === 'number'
+      )
+    );
+  }
+
   function showScreen(name: keyof typeof screens) {
     Object.values(screens).forEach((el) => el.classList.add('hidden'));
     screens[name].classList.remove('hidden');
@@ -126,9 +138,17 @@ import { btnNo, btnPrimary, btnQuiet, btnSecondary, btnYes, card } from '../lib/
       // side effect: fetch frequency list at runtime (keeps bundle small, supports future multi-source)
       const res = await fetch(defaultSource.dataPath);
       if (!res.ok) throw new Error(`failed to load frequency list (${res.status})`);
-      sourceData = await res.json();
+      const data: unknown = await res.json();
+      if (!isValidSourceData(data)) {
+        throw new Error('invalid or empty frequency list');
+      }
+      sourceData = data;
 
       testWords = buildTest(sourceData.lemmas);
+      if (testWords.length === 0) {
+        throw new Error('no test words could be sampled from frequency list');
+      }
+
       currentIndex = 0;
       answers = [];
       renderWord();

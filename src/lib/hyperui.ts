@@ -21,6 +21,15 @@ export const btnQuiet =
 export const badge =
   'rounded-full bg-indigo-100 px-2.5 py-0.5 text-sm font-semibold whitespace-nowrap text-indigo-700';
 
+function escapeHtml(text: string): string {
+  return text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
 export function progressBarHtml(current: number, total: number): string {
   const percent = total > 0 ? Math.round((current / total) * 100) : 0;
 
@@ -53,6 +62,10 @@ export function resultsHtml(
   const formattedLow = low.toLocaleString('en-US');
   const formattedHigh = high.toLocaleString('en-US');
   const formattedSource = sourceSize.toLocaleString('en-US');
+  const safeLevel = escapeHtml(level);
+  const safeCefr = escapeHtml(cefr);
+  const safeFeedback = escapeHtml(feedback);
+  const safeSourceName = escapeHtml(sourceName);
 
   return `
     <div class="text-center">
@@ -61,13 +74,13 @@ export function resultsHtml(
       <p class="mt-1 text-sm text-gray-500">words (±10%)</p>
       <p class="mt-1 text-xs text-gray-400">${formattedLow} – ${formattedHigh}</p>
       <div class="mt-6 flex items-center justify-center gap-2">
-        <span class="${badge}">${cefr}</span>
-        <span class="rounded-full border border-indigo-500 px-2.5 py-0.5 text-sm font-semibold whitespace-nowrap text-indigo-700">${level}</span>
+        <span class="${badge}">${safeCefr}</span>
+        <span class="rounded-full border border-indigo-500 px-2.5 py-0.5 text-sm font-semibold whitespace-nowrap text-indigo-700">${safeLevel}</span>
       </div>
-      <p class="mt-6 text-left text-sm text-gray-700 leading-relaxed">${feedback}</p>
+      <p class="mt-6 text-left text-sm text-gray-700 leading-relaxed">${safeFeedback}</p>
       <p class="mt-4 text-xs text-gray-500">
         You marked ${knownCount} of ${totalCount} words as known.
-        Based on ${formattedSource} lemmas from <em>${sourceName}</em>.
+        Based on ${formattedSource} lemmas from <em>${safeSourceName}</em>.
       </p>
     </div>
   `;
