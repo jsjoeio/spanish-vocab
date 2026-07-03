@@ -62,6 +62,8 @@ export function resultsHtml(
   const formattedLow = low.toLocaleString('en-US');
   const formattedHigh = high.toLocaleString('en-US');
   const formattedSource = sourceSize.toLocaleString('en-US');
+  const coveragePercent =
+    sourceSize > 0 ? Math.round((estimate / sourceSize) * 100) : 0;
   const safeLevel = escapeHtml(level);
   const safeCefr = escapeHtml(cefr);
   const safeFeedback = escapeHtml(feedback);
@@ -69,19 +71,34 @@ export function resultsHtml(
 
   return `
     <div class="text-center">
-      <p class="text-xs font-medium tracking-wide text-gray-700 uppercase">Estimated vocabulary</p>
+      <p class="text-xs font-medium tracking-wide text-gray-700 uppercase">Estimated lemmas known</p>
+      <p class="mt-1 text-sm text-gray-600">from <em>${safeSourceName}</em></p>
       <p class="mt-2 text-5xl font-bold text-gray-900 sm:text-6xl">${formatted}</p>
-      <p class="mt-1 text-sm text-gray-500">words (±10%)</p>
+      <p class="mt-1 text-sm text-gray-500">of ${formattedSource} lemmas (±10%)</p>
       <p class="mt-1 text-xs text-gray-400">${formattedLow} – ${formattedHigh}</p>
+      <p class="mt-2 text-xs text-gray-500">~${coveragePercent}% coverage of this word list</p>
+
+      <div class="mt-6 rounded-lg border border-amber-200 bg-amber-50 p-4 text-left text-sm text-amber-950 leading-relaxed">
+        <p class="font-semibold">This is not your total Spanish vocabulary.</p>
+        <p class="mt-2">
+          We sampled ${totalCount} words across frequency bands from a list of
+          ${formattedSource} lemmas drawn from <em>${safeSourceName}</em>.
+          The number above is our best guess for how many lemmas from that
+          <strong>entire list</strong> you know — based on ${knownCount} yes
+          answers out of ${totalCount} tested.
+        </p>
+        <p class="mt-2 text-xs text-amber-900/80">
+          Your real vocabulary is likely larger and includes words outside this
+          corpus (other topics, regions, and registers).
+        </p>
+      </div>
+
       <div class="mt-6 flex items-center justify-center gap-2">
         <span class="${badge}">${safeCefr}</span>
         <span class="rounded-full border border-indigo-500 px-2.5 py-0.5 text-sm font-semibold whitespace-nowrap text-indigo-700">${safeLevel}</span>
       </div>
-      <p class="mt-6 text-left text-sm text-gray-700 leading-relaxed">${safeFeedback}</p>
-      <p class="mt-4 text-xs text-gray-500">
-        You marked ${knownCount} of ${totalCount} words as known.
-        Based on ${formattedSource} lemmas from <em>${safeSourceName}</em>.
-      </p>
+      <p class="mt-3 text-xs text-gray-500">Indicative level for this word list — not an official CEFR exam score.</p>
+      <p class="mt-4 text-left text-sm text-gray-700 leading-relaxed">${safeFeedback}</p>
     </div>
   `;
 }
