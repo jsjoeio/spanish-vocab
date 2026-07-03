@@ -136,7 +136,8 @@ import { btnNo, btnPrimary, btnQuiet, btnSecondary, btnYes, card } from '../lib/
 
     try {
       // side effect: fetch frequency list at runtime (keeps bundle small, supports future multi-source)
-      const res = await fetch(new URL(defaultSource.dataPath, import.meta.env.BASE_URL).href);
+      const dataUrl = `${import.meta.env.BASE_URL}${defaultSource.dataPath}`;
+      const res = await fetch(dataUrl);
       if (!res.ok) throw new Error(`failed to load frequency list (${res.status})`);
       const data: unknown = await res.json();
       if (!isValidSourceData(data)) {
