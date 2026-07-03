@@ -1,17 +1,13 @@
 ---
-
+import Layout from '../layouts/Layout.astro';
+import VocabTest from '../components/VocabTest.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout>
+  <main class="flex min-h-screen flex-col items-center justify-center px-4 py-12">
+    <VocabTest />
+    <p class="mt-12 text-center text-xs text-stone-400">
+      MVP preview — mock data only. Estimates are simulated.
+    </p>
+  </main>
+</Layout>
