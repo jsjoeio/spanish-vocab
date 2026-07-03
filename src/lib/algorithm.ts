@@ -37,12 +37,22 @@ export interface EstimateResult {
   high: number;
   knownCount: number;
   totalCount: number;
+  coveragePercent: number;
   cefr: string;
   level: string;
   feedback: string;
   bandResults: BandResult[];
   sourceSize: number;
 }
+
+/** CEFR bands by % of the active frequency list known (works for any list size) */
+export const CEFR_COVERAGE_THRESHOLDS = {
+  A2: 25,
+  B1: 45,
+  B2: 60,
+  C1: 75,
+  C2: 90,
+} as const;
 
 export interface TestConfig {
   bandCount?: number;
@@ -191,9 +201,15 @@ export function estimateVocabulary(
 
   const knownCount = answers.filter(Boolean).length;
   const totalCount = answers.length;
+  const coveragePercent = getCoveragePercent(estimate, sourceSize);
 
-  const cefr = getCefrLevel(estimate);
-  const { level, feedback } = getLevelFeedback(estimate, knownCount, totalCount, cefr);
+  const cefr = getCefrLevel(estimate, sourceSize);
+  const { level, feedback } = getLevelFeedback(
+    coveragePercent,
+    knownCount,
+    totalCount,
+    cefr
+  );
 
   return {
     estimate,
@@ -201,6 +217,7 @@ export function estimateVocabulary(
     high,
     knownCount,
     totalCount,
+    coveragePercent,
     cefr,
     level,
     feedback,
@@ -209,18 +226,25 @@ export function estimateVocabulary(
   };
 }
 
-/** map vocabulary estimate (lemmas) to CEFR — aligned with Lenguia/SpeakZy-style test data */
-export function getCefrLevel(estimate: number): string {
-  if (estimate < 800) return 'A1';
-  if (estimate < 2_000) return 'A2';
-  if (estimate < 4_000) return 'B1';
-  if (estimate < 7_500) return 'B2';
-  if (estimate < 12_000) return 'C1';
-  return 'C2';
+/** % of lemmas known in the active frequency list (0–100) */
+export function getCoveragePercent(estimate: number, sourceSize: number): number {
+  if (sourceSize <= 0) return 0;
+  return Math.min(100, Math.round((estimate / sourceSize) * 100));
+}
+
+/** map corpus coverage % to an indicative CEFR band for this word list */
+export function getCefrLevel(estimate: number, sourceSize: number): string {
+  const coverage = getCoveragePercent(estimate, sourceSize);
+  if (coverage >= CEFR_COVERAGE_THRESHOLDS.C2) return 'C2';
+  if (coverage >= CEFR_COVERAGE_THRESHOLDS.C1) return 'C1';
+  if (coverage >= CEFR_COVERAGE_THRESHOLDS.B2) return 'B2';
+  if (coverage >= CEFR_COVERAGE_THRESHOLDS.B1) return 'B1';
+  if (coverage >= CEFR_COVERAGE_THRESHOLDS.A2) return 'A2';
+  return 'A1';
 }
 
 function getLevelFeedback(
-  estimate: number,
+  coveragePercent: number,
   knownCount: number,
   totalCount: number,
   cefr: string
@@ -229,32 +253,32 @@ function getLevelFeedback(
     A1: {
       level: 'Beginner (A1)',
       feedback:
-        'you\'re building a foundation. focus on the most frequent words in everyday rioplatense speech.',
+        `you know roughly ${coveragePercent}% of this list — still building a foundation. focus on the most frequent words first.`,
     },
     A2: {
       level: 'Elementary (A2)',
       feedback:
-        'you recognize common words in familiar topics. keep listening to native content at your level.',
+        `about ${coveragePercent}% coverage. you recognize many common words in this corpus; keep listening to content at your level.`,
     },
     B1: {
       level: 'Intermediate (B1)',
       feedback:
-        'you handle most parenting and daily-life vocabulary. try podcasts and videos slightly above your level.',
+        `about ${coveragePercent}% coverage. you handle a solid share of this parenting and daily-life vocabulary.`,
     },
     B2: {
       level: 'Upper intermediate (B2)',
       feedback:
-        'strong grasp of this corpus. push into less frequent words by reading and listening more broadly.',
+        `about ${coveragePercent}% coverage. strong grasp of this corpus — push into the less frequent bands.`,
     },
     C1: {
       level: 'Advanced (C1)',
       feedback:
-        'excellent breadth. you know most of the vocabulary in this rioplatense parenting corpus.',
+        `about ${coveragePercent}% coverage. you know most of the vocabulary in this rioplatense parenting list.`,
     },
     C2: {
       level: 'Near-native (C2)',
       feedback:
-        `impressive — you knew ${knownCount} of ${totalCount} sampled words. few gaps remain in this frequency list.`,
+        `about ${coveragePercent}% coverage — you knew ${knownCount} of ${totalCount} sampled words. few gaps remain in this list.`,
     },
   };
 
