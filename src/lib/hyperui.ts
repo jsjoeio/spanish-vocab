@@ -21,6 +21,15 @@ export const btnQuiet =
 export const badge =
   'rounded-full bg-indigo-100 px-2.5 py-0.5 text-sm font-semibold whitespace-nowrap text-indigo-700';
 
+function escapeHtml(text: string): string {
+  return text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
 export function progressBarHtml(current: number, total: number): string {
   const percent = total > 0 ? Math.round((current / total) * 100) : 0;
 
@@ -39,24 +48,39 @@ export function progressBarHtml(current: number, total: number): string {
 
 export function resultsHtml(
   estimate: number,
+  low: number,
+  high: number,
   level: string,
+  cefr: string,
   feedback: string,
   knownCount: number,
-  totalCount: number
+  totalCount: number,
+  sourceSize: number,
+  sourceName: string
 ): string {
   const formatted = estimate.toLocaleString('en-US');
+  const formattedLow = low.toLocaleString('en-US');
+  const formattedHigh = high.toLocaleString('en-US');
+  const formattedSource = sourceSize.toLocaleString('en-US');
+  const safeLevel = escapeHtml(level);
+  const safeCefr = escapeHtml(cefr);
+  const safeFeedback = escapeHtml(feedback);
+  const safeSourceName = escapeHtml(sourceName);
 
   return `
     <div class="text-center">
       <p class="text-xs font-medium tracking-wide text-gray-700 uppercase">Estimated vocabulary</p>
       <p class="mt-2 text-5xl font-bold text-gray-900 sm:text-6xl">${formatted}</p>
-      <p class="mt-1 text-lg text-gray-500">words</p>
-      <div class="mt-6">
-        <span class="${badge}">${level}</span>
+      <p class="mt-1 text-sm text-gray-500">words (±10%)</p>
+      <p class="mt-1 text-xs text-gray-400">${formattedLow} – ${formattedHigh}</p>
+      <div class="mt-6 flex items-center justify-center gap-2">
+        <span class="${badge}">${safeCefr}</span>
+        <span class="rounded-full border border-indigo-500 px-2.5 py-0.5 text-sm font-semibold whitespace-nowrap text-indigo-700">${safeLevel}</span>
       </div>
-      <p class="mt-6 text-left text-sm text-gray-700 leading-relaxed">${feedback}</p>
+      <p class="mt-6 text-left text-sm text-gray-700 leading-relaxed">${safeFeedback}</p>
       <p class="mt-4 text-xs text-gray-500">
         You marked ${knownCount} of ${totalCount} words as known.
+        Based on ${formattedSource} lemmas from <em>${safeSourceName}</em>.
       </p>
     </div>
   `;

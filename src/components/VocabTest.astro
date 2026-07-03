@@ -9,9 +9,11 @@ import { btnNo, btnPrimary, btnQuiet, btnSecondary, btnYes, card } from '../lib/
       Spanish Vocabulary Test
     </h1>
     <p class="mt-4 text-sm text-gray-700 leading-relaxed">
-      You'll see 50 Spanish words. Mark each one <strong>Yes</strong> if you know
-      its meaning, or <strong>No</strong> if you don't. Be honest — it improves the estimate.
+      You'll see up to 50 Spanish words sampled across frequency bands.
+      Click <strong>Yes</strong> only if you can recall the meaning — not just
+      recognize the word. Honest answers improve the estimate.
     </p>
+    <p id="source-label" class="mt-2 text-xs text-gray-500"></p>
     <button id="btn-start" type="button" class:list={['mt-8', btnPrimary]}>
       Start test
     </button>
@@ -48,9 +50,9 @@ import { btnNo, btnPrimary, btnQuiet, btnSecondary, btnYes, card } from '../lib/
 </div>
 
 <script>
-  import words from '../data/words.json';
-  import { estimateVocabulary } from '../lib/estimate';
+  import { buildTest, estimateVocabulary, type TestWord } from '../lib/algorithm';
   import { progressBarHtml, resultsHtml } from '../lib/hyperui';
+  import { defaultSource, type FrequencyListData } from '../lib/sources';
 
   const screens = {
     intro: document.getElementById('screen-intro')!,
@@ -58,12 +60,30 @@ import { btnNo, btnPrimary, btnQuiet, btnSecondary, btnYes, card } from '../lib/
     results: document.getElementById('screen-results')!,
   };
 
+  const btnStart = document.getElementById('btn-start') as HTMLButtonElement;
+  const sourceLabel = document.getElementById('source-label')!;
   const currentWord = document.getElementById('current-word')!;
   const progressContainer = document.getElementById('progress-container')!;
   const resultsContent = document.getElementById('results-content')!;
 
+  let testWords: TestWord[] = [];
+  let sourceData: FrequencyListData | null = null;
   let currentIndex = 0;
   let answers: boolean[] = [];
+
+  sourceLabel.textContent = `Source: ${defaultSource.name}`;
+
+  function isValidSourceData(data: unknown): data is FrequencyListData {
+    if (!data || typeof data !== 'object') return false;
+    const record = data as FrequencyListData;
+    return (
+      Array.isArray(record.lemmas) &&
+      record.lemmas.length > 0 &&
+      record.lemmas.every(
+        (l) => typeof l.lemma === 'string' && typeof l.frequency === 'number'
+      )
+    );
+  }
 
   function showScreen(name: keyof typeof screens) {
     Object.values(screens).forEach((el) => el.classList.add('hidden'));
@@ -71,20 +91,29 @@ import { btnNo, btnPrimary, btnQuiet, btnSecondary, btnYes, card } from '../lib/
   }
 
   function renderWord() {
-    currentWord.textContent = words[currentIndex].word;
-    progressContainer.innerHTML = progressBarHtml(answers.length, words.length);
+    currentWord.textContent = testWords[currentIndex].lemma;
+    progressContainer.innerHTML = progressBarHtml(answers.length, testWords.length);
   }
 
   function renderResults() {
-    const testedWords = words.slice(0, answers.length);
-    const result = estimateVocabulary(testedWords, answers);
+    const testedWords = testWords.slice(0, answers.length);
+    const result = estimateVocabulary(
+      testedWords,
+      answers,
+      sourceData!.lemmas.length
+    );
 
     resultsContent.innerHTML = resultsHtml(
       result.estimate,
+      result.low,
+      result.high,
       result.level,
+      result.cefr,
       result.feedback,
       result.knownCount,
-      result.totalCount
+      result.totalCount,
+      result.sourceSize,
+      sourceData!.name
     );
   }
 
@@ -92,7 +121,7 @@ import { btnNo, btnPrimary, btnQuiet, btnSecondary, btnYes, card } from '../lib/
     answers.push(known);
     currentIndex++;
 
-    if (currentIndex >= words.length) {
+    if (currentIndex >= testWords.length) {
       renderResults();
       showScreen('results');
       return;
@@ -101,11 +130,38 @@ import { btnNo, btnPrimary, btnQuiet, btnSecondary, btnYes, card } from '../lib/
     renderWord();
   }
 
-  function startTest() {
-    currentIndex = 0;
-    answers = [];
-    renderWord();
-    showScreen('test');
+  async function startTest() {
+    btnStart.disabled = true;
+    btnStart.textContent = 'Loading…';
+
+    try {
+      // side effect: fetch frequency list at runtime (keeps bundle small, supports future multi-source)
+      const res = await fetch(defaultSource.dataPath);
+      if (!res.ok) throw new Error(`failed to load frequency list (${res.status})`);
+      const data: unknown = await res.json();
+      if (!isValidSourceData(data)) {
+        throw new Error('invalid or empty frequency list');
+      }
+      sourceData = data;
+
+      testWords = buildTest(sourceData.lemmas);
+      if (testWords.length === 0) {
+        throw new Error('no test words could be sampled from frequency list');
+      }
+
+      currentIndex = 0;
+      answers = [];
+      renderWord();
+      showScreen('test');
+    } catch (err) {
+      btnStart.textContent = 'Failed — try again';
+      console.error(err);
+    } finally {
+      btnStart.disabled = false;
+      if (btnStart.textContent === 'Loading…') {
+        btnStart.textContent = 'Start test';
+      }
+    }
   }
 
   function finishEarly() {
@@ -114,11 +170,14 @@ import { btnNo, btnPrimary, btnQuiet, btnSecondary, btnYes, card } from '../lib/
     showScreen('results');
   }
 
-  document.getElementById('btn-start')!.addEventListener('click', startTest);
+  function restart() {
+    btnStart.textContent = 'Start test';
+    showScreen('intro');
+  }
+
+  btnStart.addEventListener('click', startTest);
   document.getElementById('btn-yes')!.addEventListener('click', () => answer(true));
   document.getElementById('btn-no')!.addEventListener('click', () => answer(false));
   document.getElementById('btn-finish')!.addEventListener('click', finishEarly);
-  document.getElementById('btn-restart')!.addEventListener('click', () => {
-    showScreen('intro');
-  });
+  document.getElementById('btn-restart')!.addEventListener('click', restart);
 </script>
