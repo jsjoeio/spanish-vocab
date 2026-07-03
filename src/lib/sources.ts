@@ -11,7 +11,7 @@ export const sources: FrequencySource[] = [
   {
     id: 'rioplatense-parenting',
     name: 'Rioplatense parenting (YouTube)',
-    dataPath: '/data/rioplatense-parenting.json',
+    dataPath: 'data/rioplatense-parenting.json',
   },
 ];
 
