@@ -1,5 +1,5 @@
 ---
-import { btnNo, btnPrimary, btnQuiet, btnSecondary, btnYes, card } from '../lib/hyperui';
+import { btnFlag, btnNo, btnPrimary, btnQuiet, btnSecondary, btnYes, card } from '../lib/hyperui';
 ---
 
 <div id="vocab-test" class="mx-auto w-full max-w-lg">
@@ -33,6 +33,10 @@ import { btnNo, btnPrimary, btnQuiet, btnSecondary, btnYes, card } from '../lib/
         <button id="btn-no" type="button" class={btnNo}>No</button>
         <button id="btn-yes" type="button" class={btnYes}>Yes</button>
       </div>
+
+      <div id="dev-flag-area" class="mt-4 hidden">
+        <button id="btn-flag" type="button" class={btnFlag}>🚩 Flag</button>
+      </div>
     </div>
 
     <button id="btn-finish" type="button" class:list={['mt-6', btnQuiet]}>
@@ -52,13 +56,16 @@ import { btnNo, btnPrimary, btnQuiet, btnSecondary, btnYes, card } from '../lib/
       <button id="btn-copy-incorrect" type="button" class:list={['hidden', btnSecondary]} data-original-text="Copy unknown lemmas">
         Copy unknown lemmas
       </button>
+      <button id="btn-copy-flagged" type="button" class:list={['hidden', btnSecondary]} data-original-text="Copy flagged lemmas">
+        Copy flagged lemmas
+      </button>
     </div>
   </div>
 </div>
 
 <script>
   import { buildTest, estimateVocabulary, type TestWord } from '../lib/algorithm';
-  import { progressBarHtml, resultsHtml } from '../lib/hyperui';
+  import { btnFlag as btnFlagCss, btnFlagActive as btnFlagActiveCss, progressBarHtml, resultsHtml } from '../lib/hyperui';
   import { defaultSource, type FrequencyListData } from '../lib/sources';
 
   const screens = {
@@ -69,15 +76,25 @@ import { btnNo, btnPrimary, btnQuiet, btnSecondary, btnYes, card } from '../lib/
 
   const btnStart = document.getElementById('btn-start') as HTMLButtonElement;
   const btnCopyIncorrect = document.getElementById('btn-copy-incorrect') as HTMLButtonElement;
+  const btnCopyFlagged = document.getElementById('btn-copy-flagged') as HTMLButtonElement;
+  const devFlagArea = document.getElementById('dev-flag-area')!;
+  const btnFlag = document.getElementById('btn-flag') as HTMLButtonElement;
   const sourceLabel = document.getElementById('source-label')!;
   const currentWord = document.getElementById('current-word')!;
   const progressContainer = document.getElementById('progress-container')!;
   const resultsContent = document.getElementById('results-content')!;
 
+  const isDev = new URLSearchParams(window.location.search).get('isDev') === 'true';
+
+  if (isDev) {
+    devFlagArea.classList.remove('hidden');
+  }
+
   let testWords: TestWord[] = [];
   let sourceData: FrequencyListData | null = null;
   let currentIndex = 0;
   let answers: boolean[] = [];
+  let flaggedLemmas = new Set<string>();
 
   sourceLabel.textContent = `Source: ${defaultSource.name}`;
 
@@ -98,9 +115,23 @@ import { btnNo, btnPrimary, btnQuiet, btnSecondary, btnYes, card } from '../lib/
     screens[name].classList.remove('hidden');
   }
 
+  function updateFlagBtn(flagged: boolean) {
+    if (flagged) {
+      btnFlag.textContent = '✓ Flagged';
+      btnFlag.className = btnFlagActiveCss;
+    } else {
+      btnFlag.textContent = '🚩 Flag';
+      btnFlag.className = btnFlagCss;
+    }
+  }
+
   function renderWord() {
-    currentWord.textContent = testWords[currentIndex].lemma;
+    const word = testWords[currentIndex];
+    currentWord.textContent = word.lemma;
     progressContainer.innerHTML = progressBarHtml(answers.length, testWords.length);
+    if (isDev) {
+      updateFlagBtn(flaggedLemmas.has(word.lemma));
+    }
   }
 
   function renderResults() {
@@ -135,6 +166,14 @@ import { btnNo, btnPrimary, btnQuiet, btnSecondary, btnYes, card } from '../lib/
     } else {
       btnCopyIncorrect.classList.add('hidden');
       delete btnCopyIncorrect.dataset.lemmas;
+    }
+
+    if (isDev && flaggedLemmas.size > 0) {
+      btnCopyFlagged.classList.remove('hidden');
+      btnCopyFlagged.dataset.lemmas = [...flaggedLemmas].join('\n');
+    } else {
+      btnCopyFlagged.classList.add('hidden');
+      delete btnCopyFlagged.dataset.lemmas;
     }
   }
 
@@ -193,11 +232,24 @@ import { btnNo, btnPrimary, btnQuiet, btnSecondary, btnYes, card } from '../lib/
   }
 
   function restart() {
+    flaggedLemmas = new Set();
     btnStart.textContent = 'Start test';
     showScreen('intro');
   }
 
+  function toggleFlag() {
+    const lemma = testWords[currentIndex].lemma;
+    if (flaggedLemmas.has(lemma)) {
+      flaggedLemmas.delete(lemma);
+      updateFlagBtn(false);
+    } else {
+      flaggedLemmas.add(lemma);
+      updateFlagBtn(true);
+    }
+  }
+
   let copyTimeout: ReturnType<typeof setTimeout> | null = null;
+  let copyFlaggedTimeout: ReturnType<typeof setTimeout> | null = null;
 
   async function copyIncorrectLemmas() {
     const lemmas = btnCopyIncorrect.dataset.lemmas;
@@ -220,10 +272,33 @@ import { btnNo, btnPrimary, btnQuiet, btnSecondary, btnYes, card } from '../lib/
     }
   }
 
+  async function copyFlaggedLemmas() {
+    const lemmas = btnCopyFlagged.dataset.lemmas;
+    if (!lemmas) return;
+    const text = lemmas
+      .split('\n')
+      .map((l) => `- ${l}`)
+      .join('\n');
+    try {
+      await navigator.clipboard.writeText(text);
+      const original = btnCopyFlagged.dataset.originalText ?? 'Copy flagged lemmas';
+      if (copyFlaggedTimeout !== null) clearTimeout(copyFlaggedTimeout);
+      btnCopyFlagged.textContent = 'Copied!';
+      copyFlaggedTimeout = setTimeout(() => {
+        btnCopyFlagged.textContent = original;
+        copyFlaggedTimeout = null;
+      }, 2000);
+    } catch {
+      // silently ignore clipboard errors (e.g. in non-secure contexts)
+    }
+  }
+
   btnStart.addEventListener('click', startTest);
   document.getElementById('btn-yes')!.addEventListener('click', () => answer(true));
   document.getElementById('btn-no')!.addEventListener('click', () => answer(false));
   document.getElementById('btn-finish')!.addEventListener('click', finishEarly);
   document.getElementById('btn-restart')!.addEventListener('click', restart);
   btnCopyIncorrect.addEventListener('click', copyIncorrectLemmas);
+  btnFlag.addEventListener('click', toggleFlag);
+  btnCopyFlagged.addEventListener('click', copyFlaggedLemmas);
 </script>
