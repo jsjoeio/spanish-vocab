@@ -35,7 +35,7 @@ import { btnFlag, btnNo, btnPrimary, btnQuiet, btnSecondary, btnYes, card } from
       </div>
     </div>
 
-    <div id="dev-flag-area" class="mt-4 hidden">
+    <div id="dev-flag-area" class="mt-4">
       <button id="btn-flag" type="button" class:list={['w-full sm:w-auto', btnFlag]}>🚩 Flag</button>
     </div>
 
@@ -77,18 +77,11 @@ import { btnFlag, btnNo, btnPrimary, btnQuiet, btnSecondary, btnYes, card } from
   const btnStart = document.getElementById('btn-start') as HTMLButtonElement;
   const btnCopyIncorrect = document.getElementById('btn-copy-incorrect') as HTMLButtonElement;
   const btnCopyFlagged = document.getElementById('btn-copy-flagged') as HTMLButtonElement;
-  const devFlagArea = document.getElementById('dev-flag-area')!;
   const btnFlag = document.getElementById('btn-flag') as HTMLButtonElement;
   const sourceLabel = document.getElementById('source-label')!;
   const currentWord = document.getElementById('current-word')!;
   const progressContainer = document.getElementById('progress-container')!;
   const resultsContent = document.getElementById('results-content')!;
-
-  const isDev = new URLSearchParams(window.location.search).get('isDev') === 'true';
-
-  if (isDev) {
-    devFlagArea.classList.remove('hidden');
-  }
 
   let testWords: TestWord[] = [];
   let sourceData: FrequencyListData | null = null;
@@ -129,9 +122,7 @@ import { btnFlag, btnNo, btnPrimary, btnQuiet, btnSecondary, btnYes, card } from
     const word = testWords[currentIndex];
     currentWord.textContent = word.lemma;
     progressContainer.innerHTML = progressBarHtml(answers.length, testWords.length);
-    if (isDev) {
-      updateFlagBtn(flaggedLemmas.has(word.lemma));
-    }
+    updateFlagBtn(flaggedLemmas.has(word.lemma));
   }
 
   function renderResults() {
@@ -168,7 +159,7 @@ import { btnFlag, btnNo, btnPrimary, btnQuiet, btnSecondary, btnYes, card } from
       delete btnCopyIncorrect.dataset.lemmas;
     }
 
-    if (isDev && flaggedLemmas.size > 0) {
+    if (flaggedLemmas.size > 0) {
       btnCopyFlagged.classList.remove('hidden');
       btnCopyFlagged.dataset.lemmas = [...flaggedLemmas].join('\n');
     } else {
