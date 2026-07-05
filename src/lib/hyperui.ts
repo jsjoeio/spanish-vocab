@@ -21,6 +21,12 @@ export const btnQuiet =
 export const badge =
   'rounded-full bg-indigo-100 px-2.5 py-0.5 text-sm font-semibold whitespace-nowrap text-indigo-700';
 
+export const btnFlag =
+  'inline-flex items-center justify-center rounded-full border border-amber-400 bg-white px-4 py-2 text-sm font-semibold text-amber-700 shadow-sm transition-colors hover:border-amber-500 hover:bg-amber-50 hover:text-amber-800 focus-visible:ring-4 focus-visible:ring-amber-200 focus-visible:outline-none';
+
+export const btnFlagActive =
+  'inline-flex items-center justify-center rounded-full border border-green-500 bg-green-50 px-4 py-2 text-sm font-semibold text-green-700 shadow-sm transition-colors hover:bg-green-100 focus-visible:ring-4 focus-visible:ring-green-200 focus-visible:outline-none';
+
 function escapeHtml(text: string): string {
   return text
     .replace(/&/g, '&amp;')
