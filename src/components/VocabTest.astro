@@ -33,13 +33,13 @@ import { btnFlag, btnNo, btnPrimary, btnQuiet, btnSecondary, btnYes, card } from
         <button id="btn-no" type="button" class={btnNo}>No</button>
         <button id="btn-yes" type="button" class={btnYes}>Yes</button>
       </div>
-
-      <div id="dev-flag-area" class="mt-4 hidden">
-        <button id="btn-flag" type="button" class={btnFlag}>🚩 Flag</button>
-      </div>
     </div>
 
-    <button id="btn-finish" type="button" class:list={['mt-6', btnQuiet]}>
+    <div id="dev-flag-area" class="mt-4 hidden">
+      <button id="btn-flag" type="button" class:list={['w-full sm:w-auto', btnFlag]}>🚩 Flag</button>
+    </div>
+
+    <button id="btn-finish" type="button" class:list={['mt-3', btnQuiet]}>
       Finish early
     </button>
   </div>
