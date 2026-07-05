@@ -45,9 +45,14 @@ import { btnNo, btnPrimary, btnQuiet, btnSecondary, btnYes, card } from '../lib/
     <div class={card}>
       <div id="results-content"></div>
     </div>
-    <button id="btn-restart" type="button" class:list={['mt-6', btnSecondary]}>
-      Take test again
-    </button>
+    <div class="mt-6 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
+      <button id="btn-restart" type="button" class={btnSecondary}>
+        Take test again
+      </button>
+      <button id="btn-copy-incorrect" type="button" class:list={['hidden', btnSecondary]} data-original-text="Copy unknown lemmas">
+        Copy unknown lemmas
+      </button>
+    </div>
   </div>
 </div>
 
@@ -63,6 +68,7 @@ import { btnNo, btnPrimary, btnQuiet, btnSecondary, btnYes, card } from '../lib/
   };
 
   const btnStart = document.getElementById('btn-start') as HTMLButtonElement;
+  const btnCopyIncorrect = document.getElementById('btn-copy-incorrect') as HTMLButtonElement;
   const sourceLabel = document.getElementById('source-label')!;
   const currentWord = document.getElementById('current-word')!;
   const progressContainer = document.getElementById('progress-container')!;
@@ -118,6 +124,18 @@ import { btnNo, btnPrimary, btnQuiet, btnSecondary, btnYes, card } from '../lib/
       sourceData!.name,
       result.coveragePercent
     );
+
+    const unknownLemmas = testedWords
+      .filter((_, i) => answers[i] !== true)
+      .map((w) => w.lemma);
+
+    if (unknownLemmas.length > 0) {
+      btnCopyIncorrect.classList.remove('hidden');
+      btnCopyIncorrect.dataset.lemmas = unknownLemmas.join('\n');
+    } else {
+      btnCopyIncorrect.classList.add('hidden');
+      delete btnCopyIncorrect.dataset.lemmas;
+    }
   }
 
   function answer(known: boolean) {
@@ -179,9 +197,33 @@ import { btnNo, btnPrimary, btnQuiet, btnSecondary, btnYes, card } from '../lib/
     showScreen('intro');
   }
 
+  let copyTimeout: ReturnType<typeof setTimeout> | null = null;
+
+  async function copyIncorrectLemmas() {
+    const lemmas = btnCopyIncorrect.dataset.lemmas;
+    if (!lemmas) return;
+    const text = lemmas
+      .split('\n')
+      .map((l) => `- ${l}`)
+      .join('\n');
+    try {
+      await navigator.clipboard.writeText(text);
+      const original = btnCopyIncorrect.dataset.originalText ?? 'Copy unknown lemmas';
+      if (copyTimeout !== null) clearTimeout(copyTimeout);
+      btnCopyIncorrect.textContent = 'Copied!';
+      copyTimeout = setTimeout(() => {
+        btnCopyIncorrect.textContent = original;
+        copyTimeout = null;
+      }, 2000);
+    } catch {
+      // silently ignore clipboard errors (e.g. in non-secure contexts)
+    }
+  }
+
   btnStart.addEventListener('click', startTest);
   document.getElementById('btn-yes')!.addEventListener('click', () => answer(true));
   document.getElementById('btn-no')!.addEventListener('click', () => answer(false));
   document.getElementById('btn-finish')!.addEventListener('click', finishEarly);
   document.getElementById('btn-restart')!.addEventListener('click', restart);
+  btnCopyIncorrect.addEventListener('click', copyIncorrectLemmas);
 </script>
