@@ -248,7 +248,7 @@ import { btnFlag, btnNo, btnPrimary, btnQuiet, btnSecondary, btnYes, card } from
     }
   }
 
-  let copyTimeout: ReturnType<typeof setTimeout> | null = null;
+  let copyIncorrectTimeout: ReturnType<typeof setTimeout> | null = null;
   let copyFlaggedTimeout: ReturnType<typeof setTimeout> | null = null;
 
   async function copyIncorrectLemmas() {
@@ -261,11 +261,11 @@ import { btnFlag, btnNo, btnPrimary, btnQuiet, btnSecondary, btnYes, card } from
     try {
       await navigator.clipboard.writeText(text);
       const original = btnCopyIncorrect.dataset.originalText ?? 'Copy unknown lemmas';
-      if (copyTimeout !== null) clearTimeout(copyTimeout);
+      if (copyIncorrectTimeout !== null) clearTimeout(copyIncorrectTimeout);
       btnCopyIncorrect.textContent = 'Copied!';
-      copyTimeout = setTimeout(() => {
+      copyIncorrectTimeout = setTimeout(() => {
         btnCopyIncorrect.textContent = original;
-        copyTimeout = null;
+        copyIncorrectTimeout = null;
       }, 2000);
     } catch {
       // silently ignore clipboard errors (e.g. in non-secure contexts)
