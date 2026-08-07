@@ -60,9 +60,9 @@ contar,49
 buscar,47
 chico,47
 bebar,47
+caer,47
 pedir,46
 celular,46
-caer,46
 volver,45
 mañana,43
 difícil,43
@@ -81,12 +81,12 @@ lugar,38
 llevar,37
 caso,36
 red,35
+llorar,35
 nacer,35
 comar,34
 preguntar,34
 mira,34
 haber,34
-llorar,34
 realmente,34
 pañal,34
 escuchar,33
@@ -104,12 +104,12 @@ agarrar,30
 tecnología,30
 embarazo,30
 pareja,30
+necesitar,29
 charla,29
 saber,29
 acá,29
 charlar,29
 tranquilo,29
-necesitar,28
 aparecer,28
 teta,28
 punto,28
@@ -220,6 +220,7 @@ panza,15
 baño,15
 novio,15
 gracia,14
+responder,14
 suerte,14
 idea,14
 arrancar,14
@@ -243,7 +244,6 @@ serio,14
 límite,13
 galletita,13
 fruta,13
-responder,13
 agua,13
 camino,13
 bajar,13
@@ -380,6 +380,7 @@ valor,9
 capítulo,9
 voz,9
 emoción,9
+andar,9
 terror,9
 turbante,9
 visita,9
@@ -434,7 +435,6 @@ superar,8
 rápido,8
 fiesta,8
 curso,8
-andar,8
 hospital,8
 cesárea,8
 acompañamiento,8
@@ -833,6 +833,7 @@ ducha,4
 comunicación,4
 familiar,4
 error,4
+bebita,4
 soñer,4
 sexualidad,4
 creser,4
@@ -881,7 +882,6 @@ joda,4
 navidad,4
 frase,4
 aprendar,4
-bebito,4
 proveedor,4
 euge,4
 desempeño,4
@@ -1678,6 +1678,7 @@ cariño,2
 tarta,2
 lavado,2
 privado,2
+encarar,2
 juicio,2
 estuvistir,2
 parer,2
@@ -1695,6 +1696,7 @@ ayudartar,2
 movilizante,2
 quietud,2
 duermen,2
+bebito,2
 estigma,2
 maternar,2
 pear,2
@@ -2440,7 +2442,6 @@ puñal,1
 pobrecitir,1
 sepamos,1
 erramos,1
-bebitar,1
 chiquitar,1
 vístete,1
 perseguido,1
@@ -3142,7 +3143,6 @@ ido,1
 bardear,1
 bridge,1
 apretado,1
-encarar,1
 invierno,1
 tapadito,1
 cargar,1
@@ -3288,7 +3288,6 @@ ira,1
 receta,1
 obligarlo,1
 corporal,1
-encaramos,1
 abordaje,1
 forzar,1
 lema,1
@@ -3310,7 +3309,6 @@ mayonesa,1
 buenísima,1
 mordida,1
 ananá,1
-anaiboa,1
 conés,1
 nana,1
 caro,1
@@ -3346,13 +3344,11 @@ disparador,1
 bocina,1
 certificado,1
 etiqueta,1
-necesite,1
 kinesiología,1
 ocupación,1
 primordial,1
 acompañarla,1
 festejar,1
-caigo,1
 recoger,1
 despojar,1
 cuidadora,1
@@ -3390,12 +3386,10 @@ mutar,1
 efectivo,1
 triada,1
 recuperar,1
-lloro,1
 enferma,1
 bloqueado,1
 sacadito,1
 enfermar,1
-respondí,1
 felicitar,1
 inquietar,1
 silla,1
@@ -3413,12 +3407,11 @@ replanteo,1
 admirar,1
 man,1
 disociado,1
-estéticar,1
+estética,1
 desencadenar,1
 pascua,1
 únicamente,1
 bruscamente,1
-ando,1
 despedir,1
 sacado,1
 apartado,1
@@ -3428,7 +3421,6 @@ culpar,1
 dicotomía,1
 opina,1
 bala,1
-preponir,1
 cometer,1
 individualmente,1
 entendible,1
@@ -3440,11 +3432,10 @@ protagonista,1
 ubicado,1
 núcleo,1
 fotón,1
-apaleo,1
+apalear,1
 publico,1
 intermedio,1
 obsesivo,1
-bebita,1
 resignación,1
 rever,1
 sentimentalmente,1
@@ -3503,7 +3494,7 @@ amarillo,1
 hamacarme,1
 autito,1
 pañalito,1
-copie,1
+copiar,1
 acceso,1
 peluches,1
 tóxico,1
@@ -3523,7 +3514,6 @@ bruta,1
 motricidad,1
 fino,1
 verbalizar,1
-presar,1
 intuir,1
 manipulación,1
 chulín,1
