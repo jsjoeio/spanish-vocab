@@ -136,11 +136,34 @@ export function sampleTestWords(
 }
 
 /**
+ * pick a replacement lemma from the same frequency band, excluding already-used lemmas.
+ * returns null when the band has no unused candidates left.
+ */
+export function pickReplacementFromBand(
+  bands: Band[],
+  bandIndex: number,
+  exclude: ReadonlySet<string>,
+  rng: () => number = Math.random
+): RankedLemma | null {
+  const band = bands.find((b) => b.index === bandIndex);
+  if (!band) return null;
+
+  const candidates = band.lemmas.filter((l) => !exclude.has(l.lemma));
+  if (candidates.length === 0) return null;
+
+  const pick = candidates[Math.floor(rng() * candidates.length)];
+  return pick ?? null;
+}
+
+/**
  * estimate vocabulary using stratified band scoring:
  *   estimate = Σ (band_size × %known_in_band)
  *
  * only bands that were actually tested contribute (supports early finish).
  * confidence interval is a simple ±margin% smoothing layer.
+ *
+ * pass only scored items — flagged/replaced words should be omitted from
+ * testWords and answers so they neither count as known nor unknown.
  */
 export function estimateVocabulary(
   testWords: TestWord[],

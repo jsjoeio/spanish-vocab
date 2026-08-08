@@ -35,8 +35,16 @@ import { btnFlag, btnNo, btnPrimary, btnQuiet, btnSecondary, btnYes, card } from
       </div>
     </div>
 
-    <div id="dev-flag-area" class="mt-4">
-      <button id="btn-flag" type="button" class:list={['w-full sm:w-auto', btnFlag]}>🚩 Flag</button>
+    <div id="flag-area" class="mt-4">
+      <button id="btn-flag" type="button" class:list={['w-full sm:w-auto', btnFlag]}>
+        🚩 Flag &amp; replace
+      </button>
+      <p class="mt-2 text-xs text-gray-500 leading-relaxed">
+        Not a real Spanish word, or misspelled? Flag it and we’ll swap in another
+        word from the same frequency band. Flagged words don’t count toward your
+        score.
+      </p>
+      <p id="flag-feedback" class="mt-2 hidden text-xs font-medium text-amber-800" role="status" aria-live="polite"></p>
     </div>
 
     <button id="btn-finish" type="button" class:list={['mt-3', btnQuiet]}>
@@ -64,8 +72,16 @@ import { btnFlag, btnNo, btnPrimary, btnQuiet, btnSecondary, btnYes, card } from
 </div>
 
 <script>
-  import { buildTest, estimateVocabulary, type TestWord } from '../lib/algorithm';
-  import { btnFlag as btnFlagCss, btnFlagActive as btnFlagActiveCss, progressBarHtml, resultsHtml } from '../lib/hyperui';
+  import {
+    estimateVocabulary,
+    pickReplacementFromBand,
+    rankLemmas,
+    sampleTestWords,
+    splitIntoBands,
+    type Band,
+    type TestWord,
+  } from '../lib/algorithm';
+  import { progressBarHtml, resultsHtml } from '../lib/hyperui';
   import { defaultSource, type FrequencyListData } from '../lib/sources';
 
   const screens = {
@@ -82,12 +98,16 @@ import { btnFlag, btnNo, btnPrimary, btnQuiet, btnSecondary, btnYes, card } from
   const currentWord = document.getElementById('current-word')!;
   const progressContainer = document.getElementById('progress-container')!;
   const resultsContent = document.getElementById('results-content')!;
+  const flagFeedback = document.getElementById('flag-feedback')!;
 
   let testWords: TestWord[] = [];
+  let bands: Band[] = [];
   let sourceData: FrequencyListData | null = null;
   let currentIndex = 0;
   let answers: boolean[] = [];
+  // lemmas flagged as invalid/misspelled — never scored (not known, not unknown)
   let flaggedLemmas = new Set<string>();
+  let flagFeedbackTimeout: ReturnType<typeof setTimeout> | null = null;
 
   sourceLabel.textContent = `Source: ${defaultSource.name}`;
 
@@ -108,24 +128,34 @@ import { btnFlag, btnNo, btnPrimary, btnQuiet, btnSecondary, btnYes, card } from
     screens[name].classList.remove('hidden');
   }
 
-  function updateFlagBtn(flagged: boolean) {
-    if (flagged) {
-      btnFlag.textContent = '✓ Flagged';
-      btnFlag.className = btnFlagActiveCss;
-    } else {
-      btnFlag.textContent = '🚩 Flag';
-      btnFlag.className = btnFlagCss;
-    }
+  function showFlagFeedback(message: string) {
+    flagFeedback.textContent = message;
+    flagFeedback.classList.remove('hidden');
+    if (flagFeedbackTimeout !== null) clearTimeout(flagFeedbackTimeout);
+    flagFeedbackTimeout = setTimeout(() => {
+      flagFeedback.classList.add('hidden');
+      flagFeedback.textContent = '';
+      flagFeedbackTimeout = null;
+    }, 3500);
+  }
+
+  function usedLemmas(): Set<string> {
+    const used = new Set<string>(flaggedLemmas);
+    for (const w of testWords) used.add(w.lemma);
+    return used;
   }
 
   function renderWord() {
     const word = testWords[currentIndex];
+    if (!word) return;
     currentWord.textContent = word.lemma;
+    // progress uses scored answers vs remaining slots (flagged/replaced words
+    // never get an answer, so they are excluded from both sides when removed)
     progressContainer.innerHTML = progressBarHtml(answers.length, testWords.length);
-    updateFlagBtn(flaggedLemmas.has(word.lemma));
   }
 
   function renderResults() {
+    // only answered words are scored; flagged ones were replaced or removed
     const testedWords = testWords.slice(0, answers.length);
     const result = estimateVocabulary(
       testedWords,
@@ -144,11 +174,12 @@ import { btnFlag, btnNo, btnPrimary, btnQuiet, btnSecondary, btnYes, card } from
       result.totalCount,
       result.sourceSize,
       sourceData!.name,
-      result.coveragePercent
+      result.coveragePercent,
+      flaggedLemmas.size
     );
 
     const unknownLemmas = testedWords
-      .filter((_, i) => answers[i] !== true)
+      .filter((_, i) => answers[i] === false)
       .map((w) => w.lemma);
 
     if (unknownLemmas.length > 0) {
@@ -168,17 +199,63 @@ import { btnFlag, btnNo, btnPrimary, btnQuiet, btnSecondary, btnYes, card } from
     }
   }
 
-  function answer(known: boolean) {
-    answers.push(known);
-    currentIndex++;
-
+  function goToResultsOrNext() {
     if (currentIndex >= testWords.length) {
+      if (answers.length === 0) {
+        // edge case: everything was flagged with no scored answers
+        showFlagFeedback('No scored words left — start again when you’re ready.');
+        restart();
+        return;
+      }
       renderResults();
       showScreen('results');
       return;
     }
-
     renderWord();
+  }
+
+  function answer(known: boolean) {
+    answers.push(known);
+    currentIndex++;
+    goToResultsOrNext();
+  }
+
+  /**
+   * flag current word as invalid/misspelled:
+   * record it, exclude from scoring, replace with another lemma from the same
+   * frequency band when possible (no limit — replacements can be flagged too).
+   */
+  function flagAndReplace() {
+    const word = testWords[currentIndex];
+    if (!word) return;
+
+    flaggedLemmas.add(word.lemma);
+
+    const replacement = pickReplacementFromBand(
+      bands,
+      word.band,
+      usedLemmas()
+    );
+
+    if (replacement) {
+      testWords[currentIndex] = {
+        ...replacement,
+        band: word.band,
+        bandSize: word.bandSize,
+      };
+      showFlagFeedback(
+        `Flagged “${word.lemma}” — replaced with another word from the same band.`
+      );
+      renderWord();
+      return;
+    }
+
+    // no unused lemmas left in this band: drop the slot so it doesn't inflate totals
+    testWords.splice(currentIndex, 1);
+    showFlagFeedback(
+      `Flagged “${word.lemma}” — no more alternatives in this band, so we skipped it.`
+    );
+    goToResultsOrNext();
   }
 
   async function startTest() {
@@ -196,13 +273,18 @@ import { btnFlag, btnNo, btnPrimary, btnQuiet, btnSecondary, btnYes, card } from
       }
       sourceData = data;
 
-      testWords = buildTest(sourceData.lemmas);
+      const ranked = rankLemmas(sourceData.lemmas);
+      bands = splitIntoBands(ranked);
+      testWords = sampleTestWords(bands);
       if (testWords.length === 0) {
         throw new Error('no test words could be sampled from frequency list');
       }
 
       currentIndex = 0;
       answers = [];
+      flaggedLemmas = new Set();
+      flagFeedback.classList.add('hidden');
+      flagFeedback.textContent = '';
       renderWord();
       showScreen('test');
     } catch (err) {
@@ -224,19 +306,12 @@ import { btnFlag, btnNo, btnPrimary, btnQuiet, btnSecondary, btnYes, card } from
 
   function restart() {
     flaggedLemmas = new Set();
+    bands = [];
+    testWords = [];
+    answers = [];
+    currentIndex = 0;
     btnStart.textContent = 'Start test';
     showScreen('intro');
-  }
-
-  function toggleFlag() {
-    const lemma = testWords[currentIndex].lemma;
-    if (flaggedLemmas.has(lemma)) {
-      flaggedLemmas.delete(lemma);
-      updateFlagBtn(false);
-    } else {
-      flaggedLemmas.add(lemma);
-      updateFlagBtn(true);
-    }
   }
 
   let copyIncorrectTimeout: ReturnType<typeof setTimeout> | null = null;
@@ -290,6 +365,6 @@ import { btnFlag, btnNo, btnPrimary, btnQuiet, btnSecondary, btnYes, card } from
   document.getElementById('btn-finish')!.addEventListener('click', finishEarly);
   document.getElementById('btn-restart')!.addEventListener('click', restart);
   btnCopyIncorrect.addEventListener('click', copyIncorrectLemmas);
-  btnFlag.addEventListener('click', toggleFlag);
+  btnFlag.addEventListener('click', flagAndReplace);
   btnCopyFlagged.addEventListener('click', copyFlaggedLemmas);
 </script>

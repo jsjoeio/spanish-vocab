@@ -24,9 +24,6 @@ export const badge =
 export const btnFlag =
   'inline-flex items-center justify-center rounded-full border border-amber-400 bg-white px-4 py-2 text-sm font-semibold text-amber-700 shadow-sm transition-colors hover:border-amber-500 hover:bg-amber-50 hover:text-amber-800 focus-visible:ring-4 focus-visible:ring-amber-200 focus-visible:outline-none';
 
-export const btnFlagActive =
-  'inline-flex items-center justify-center rounded-full border border-green-500 bg-green-50 px-4 py-2 text-sm font-semibold text-green-700 shadow-sm transition-colors hover:bg-green-100 focus-visible:ring-4 focus-visible:ring-green-200 focus-visible:outline-none';
-
 function escapeHtml(text: string): string {
   return text
     .replace(/&/g, '&amp;')
@@ -63,7 +60,8 @@ export function resultsHtml(
   totalCount: number,
   sourceSize: number,
   sourceName: string,
-  coveragePercent: number
+  coveragePercent: number,
+  flaggedCount = 0
 ): string {
   const formatted = estimate.toLocaleString('en-US');
   const formattedLow = low.toLocaleString('en-US');
@@ -73,6 +71,10 @@ export function resultsHtml(
   const safeCefr = escapeHtml(cefr);
   const safeFeedback = escapeHtml(feedback);
   const safeSourceName = escapeHtml(sourceName);
+  const flaggedNote =
+    flaggedCount > 0
+      ? ` ${flaggedCount} flagged word${flaggedCount === 1 ? '' : 's'} ${flaggedCount === 1 ? 'was' : 'were'} excluded from the score.`
+      : '';
 
   return `
     <div class="text-center">
@@ -86,11 +88,11 @@ export function resultsHtml(
       <div class="mt-6 rounded-lg border border-amber-200 bg-amber-50 p-4 text-left text-sm text-amber-950 leading-relaxed">
         <p class="font-semibold">This is not your total Spanish vocabulary.</p>
         <p class="mt-2">
-          We sampled ${totalCount} words across frequency bands from a list of
+          We scored ${totalCount} words across frequency bands from a list of
           ${formattedSource} lemmas drawn from <em>${safeSourceName}</em>.
           The number above is our best guess for how many lemmas from that
           <strong>entire list</strong> you know — based on ${knownCount} yes
-          answers out of ${totalCount} tested.
+          answers out of ${totalCount} scored.${flaggedNote}
         </p>
         <p class="mt-2 text-xs text-amber-900/80">
           Your real vocabulary is likely larger and includes words outside this
