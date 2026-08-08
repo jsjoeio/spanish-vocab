@@ -88,6 +88,12 @@ import { btnFlag, btnNo, btnPrimary, btnQuiet, btnSecondary, btnYes, card } from
     type TestWord,
   } from '../lib/algorithm';
   import { progressBarHtml, resultsHtml } from '../lib/hyperui';
+  import {
+    excludedLemmas,
+    loadProgress,
+    mergeAndSaveSession,
+    progressFromSession,
+  } from '../lib/progress';
   import { defaultSource, type FrequencyListData } from '../lib/sources';
 
   const screens = {
@@ -114,6 +120,14 @@ import { btnFlag, btnNo, btnPrimary, btnQuiet, btnSecondary, btnYes, card } from
   // lemmas flagged as invalid/misspelled — never scored (not known, not unknown)
   let flaggedLemmas = new Set<string>();
   let flagFeedbackTimeout: ReturnType<typeof setTimeout> | null = null;
+
+  function browserStorage(): Storage | null {
+    try {
+      return typeof localStorage !== 'undefined' ? localStorage : null;
+    } catch {
+      return null;
+    }
+  }
 
   sourceLabel.textContent = `Source: ${defaultSource.name}`;
 
@@ -145,7 +159,9 @@ import { btnFlag, btnNo, btnPrimary, btnQuiet, btnSecondary, btnYes, card } from
   }
 
   function usedLemmas(): Set<string> {
-    const used = new Set<string>(flaggedLemmas);
+    const sourceId = sourceData?.id ?? defaultSource.id;
+    const prior = excludedLemmas(loadProgress(sourceId, browserStorage()));
+    const used = new Set<string>([...prior, ...flaggedLemmas]);
     for (const w of testWords) used.add(w.lemma);
     return used;
   }
@@ -159,6 +175,17 @@ import { btnFlag, btnNo, btnPrimary, btnQuiet, btnSecondary, btnYes, card } from
     progressContainer.innerHTML = progressBarHtml(answers.length, testWords.length);
   }
 
+  function persistSessionProgress() {
+    const sourceId = sourceData?.id ?? defaultSource.id;
+    const session = progressFromSession(
+      sourceId,
+      testWords,
+      answers,
+      flaggedLemmas
+    );
+    mergeAndSaveSession(sourceId, session, browserStorage());
+  }
+
   function renderResults() {
     // only answered words are scored; flagged ones were replaced or removed
     const testedWords = testWords.slice(0, answers.length);
@@ -167,6 +194,9 @@ import { btnFlag, btnNo, btnPrimary, btnQuiet, btnSecondary, btnYes, card } from
       answers,
       sourceData!.lemmas.length
     );
+
+    // save known + flagged for this frequency list (merge with prior runs)
+    persistSessionProgress();
 
     resultsContent.innerHTML = resultsHtml(
       result.estimate,
@@ -278,11 +308,19 @@ import { btnFlag, btnNo, btnPrimary, btnQuiet, btnSecondary, btnYes, card } from
       }
       sourceData = data;
 
+      const sourceId = sourceData.id || defaultSource.id;
+      const priorExclude = excludedLemmas(loadProgress(sourceId, browserStorage()));
+
       const ranked = rankLemmas(sourceData.lemmas);
       bands = splitIntoBands(ranked);
-      testWords = sampleTestWords(bands);
+      // skip lemmas already known or flagged on this frequency list
+      testWords = sampleTestWords(bands, {}, Math.random, priorExclude);
       if (testWords.length === 0) {
-        throw new Error('no test words could be sampled from frequency list');
+        throw new Error(
+          priorExclude.size > 0
+            ? 'no new test words left — all remaining lemmas were known or flagged'
+            : 'no test words could be sampled from frequency list'
+        );
       }
 
       currentIndex = 0;
