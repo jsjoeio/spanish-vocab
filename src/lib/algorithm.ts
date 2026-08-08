@@ -112,11 +112,13 @@ export function shuffle<T>(items: T[], rng: () => number = Math.random): T[] {
 /**
  * sample wordsPerBand lemmas from each band, capped at maxWords total.
  * shuffles final order so band progression isn't obvious during the test.
+ * lemmas in `exclude` (e.g. already known or flagged from prior sessions) are skipped.
  */
 export function sampleTestWords(
   bands: Band[],
   config: TestConfig = {},
-  rng: () => number = Math.random
+  rng: () => number = Math.random,
+  exclude: ReadonlySet<string> = new Set()
 ): TestWord[] {
   const { wordsPerBand, maxWords } = { ...DEFAULT_CONFIG, ...config };
   const sampled: TestWord[] = [];
@@ -124,8 +126,13 @@ export function sampleTestWords(
   for (const band of bands) {
     if (sampled.length >= maxWords) break;
 
-    const count = Math.min(wordsPerBand, band.lemmas.length, maxWords - sampled.length);
-    const picks = shuffle(band.lemmas, rng).slice(0, count);
+    const available = exclude.size === 0
+      ? band.lemmas
+      : band.lemmas.filter((l) => !exclude.has(l.lemma));
+    const count = Math.min(wordsPerBand, available.length, maxWords - sampled.length);
+    if (count <= 0) continue;
+
+    const picks = shuffle(available, rng).slice(0, count);
 
     for (const lemma of picks) {
       sampled.push({ ...lemma, band: band.index, bandSize: band.size });
@@ -312,9 +319,10 @@ function getLevelFeedback(
 export function buildTest(
   lemmas: Lemma[],
   config: TestConfig = {},
-  rng: () => number = Math.random
+  rng: () => number = Math.random,
+  exclude: ReadonlySet<string> = new Set()
 ): TestWord[] {
   const ranked = rankLemmas(lemmas);
   const bands = splitIntoBands(ranked, config.bandCount ?? DEFAULT_CONFIG.bandCount);
-  return sampleTestWords(bands, config, rng);
+  return sampleTestWords(bands, config, rng, exclude);
 }
