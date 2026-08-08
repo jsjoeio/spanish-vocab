@@ -44,7 +44,13 @@ import { btnFlag, btnNo, btnPrimary, btnQuiet, btnSecondary, btnYes, card } from
         word from the same frequency band. Flagged words don’t count toward your
         score.
       </p>
-      <p id="flag-feedback" class="mt-2 hidden text-xs font-medium text-amber-800" role="status" aria-live="polite"></p>
+      <!-- fixed min-height so show/hide feedback doesn't shift the finish button -->
+      <p
+        id="flag-feedback"
+        class="mt-2 min-h-[2.75rem] text-xs font-medium leading-relaxed text-amber-800"
+        role="status"
+        aria-live="polite"
+      ></p>
     </div>
 
     <button id="btn-finish" type="button" class:list={['mt-3', btnQuiet]}>
@@ -129,11 +135,10 @@ import { btnFlag, btnNo, btnPrimary, btnQuiet, btnSecondary, btnYes, card } from
   }
 
   function showFlagFeedback(message: string) {
+    // keep the element in flow (min-height) so text in/out doesn't shift layout
     flagFeedback.textContent = message;
-    flagFeedback.classList.remove('hidden');
     if (flagFeedbackTimeout !== null) clearTimeout(flagFeedbackTimeout);
     flagFeedbackTimeout = setTimeout(() => {
-      flagFeedback.classList.add('hidden');
       flagFeedback.textContent = '';
       flagFeedbackTimeout = null;
     }, 3500);
@@ -283,8 +288,11 @@ import { btnFlag, btnNo, btnPrimary, btnQuiet, btnSecondary, btnYes, card } from
       currentIndex = 0;
       answers = [];
       flaggedLemmas = new Set();
-      flagFeedback.classList.add('hidden');
       flagFeedback.textContent = '';
+      if (flagFeedbackTimeout !== null) {
+        clearTimeout(flagFeedbackTimeout);
+        flagFeedbackTimeout = null;
+      }
       renderWord();
       showScreen('test');
     } catch (err) {
