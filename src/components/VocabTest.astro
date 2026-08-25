@@ -63,7 +63,7 @@ import { btnFlag, btnNo, btnPrimary, btnQuiet, btnSecondary, btnYes, card } from
     <div class={card}>
       <div id="results-content"></div>
     </div>
-    <div class="mt-6 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
+    <div class="mt-6 flex flex-col items-center gap-3 sm:flex-row sm:flex-wrap sm:justify-center">
       <button id="btn-restart" type="button" class={btnSecondary}>
         Take test again
       </button>
@@ -72,6 +72,9 @@ import { btnFlag, btnNo, btnPrimary, btnQuiet, btnSecondary, btnYes, card } from
       </button>
       <button id="btn-copy-flagged" type="button" class:list={['hidden', btnSecondary]} data-original-text="Copy flagged lemmas">
         Copy flagged lemmas
+      </button>
+      <button id="btn-github-flagged" type="button" class:list={['hidden', btnSecondary]} data-original-text="Copy &amp; open GitHub issue">
+        Copy &amp; open GitHub issue
       </button>
     </div>
   </div>
@@ -95,6 +98,10 @@ import { btnFlag, btnNo, btnPrimary, btnQuiet, btnSecondary, btnYes, card } from
     progressFromSession,
   } from '../lib/progress';
   import { defaultSource, type FrequencyListData } from '../lib/sources';
+  import {
+    flaggedLemmasIssueBody,
+    flaggedLemmasIssueUrl,
+  } from '../lib/github-issue';
 
   const screens = {
     intro: document.getElementById('screen-intro')!,
@@ -105,6 +112,7 @@ import { btnFlag, btnNo, btnPrimary, btnQuiet, btnSecondary, btnYes, card } from
   const btnStart = document.getElementById('btn-start') as HTMLButtonElement;
   const btnCopyIncorrect = document.getElementById('btn-copy-incorrect') as HTMLButtonElement;
   const btnCopyFlagged = document.getElementById('btn-copy-flagged') as HTMLButtonElement;
+  const btnGithubFlagged = document.getElementById('btn-github-flagged') as HTMLButtonElement;
   const btnFlag = document.getElementById('btn-flag') as HTMLButtonElement;
   const sourceLabel = document.getElementById('source-label')!;
   const currentWord = document.getElementById('current-word')!;
@@ -228,9 +236,11 @@ import { btnFlag, btnNo, btnPrimary, btnQuiet, btnSecondary, btnYes, card } from
     if (flaggedLemmas.size > 0) {
       btnCopyFlagged.classList.remove('hidden');
       btnCopyFlagged.dataset.lemmas = [...flaggedLemmas].join('\n');
+      btnGithubFlagged.classList.remove('hidden');
     } else {
       btnCopyFlagged.classList.add('hidden');
       delete btnCopyFlagged.dataset.lemmas;
+      btnGithubFlagged.classList.add('hidden');
     }
   }
 
@@ -362,6 +372,7 @@ import { btnFlag, btnNo, btnPrimary, btnQuiet, btnSecondary, btnYes, card } from
 
   let copyIncorrectTimeout: ReturnType<typeof setTimeout> | null = null;
   let copyFlaggedTimeout: ReturnType<typeof setTimeout> | null = null;
+  let githubFlaggedTimeout: ReturnType<typeof setTimeout> | null = null;
 
   async function copyIncorrectLemmas() {
     const lemmas = btnCopyIncorrect.dataset.lemmas;
@@ -405,6 +416,29 @@ import { btnFlag, btnNo, btnPrimary, btnQuiet, btnSecondary, btnYes, card } from
     }
   }
 
+  function flashGithubFlaggedButton(label: string) {
+    const original =
+      btnGithubFlagged.dataset.originalText ?? 'Copy & open GitHub issue';
+    if (githubFlaggedTimeout !== null) clearTimeout(githubFlaggedTimeout);
+    btnGithubFlagged.textContent = label;
+    githubFlaggedTimeout = setTimeout(() => {
+      btnGithubFlagged.textContent = original;
+      githubFlaggedTimeout = null;
+    }, 2000);
+  }
+
+  function copyAndOpenGithubIssue() {
+    if (flaggedLemmas.size === 0) return;
+    const lemmas = [...flaggedLemmas];
+    const body = flaggedLemmasIssueBody(lemmas);
+    // open first so the click stays a user gesture (popup blockers)
+    window.open(flaggedLemmasIssueUrl(lemmas), '_blank', 'noopener,noreferrer');
+    void navigator.clipboard.writeText(body).then(
+      () => flashGithubFlaggedButton('Copied!'),
+      () => flashGithubFlaggedButton('Opened!')
+    );
+  }
+
   btnStart.addEventListener('click', startTest);
   document.getElementById('btn-yes')!.addEventListener('click', () => answer(true));
   document.getElementById('btn-no')!.addEventListener('click', () => answer(false));
@@ -413,4 +447,5 @@ import { btnFlag, btnNo, btnPrimary, btnQuiet, btnSecondary, btnYes, card } from
   btnCopyIncorrect.addEventListener('click', copyIncorrectLemmas);
   btnFlag.addEventListener('click', flagAndReplace);
   btnCopyFlagged.addEventListener('click', copyFlaggedLemmas);
+  btnGithubFlagged.addEventListener('click', copyAndOpenGithubIssue);
 </script>

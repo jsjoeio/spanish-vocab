@@ -16,6 +16,7 @@
   "dependencies": {
     "@tailwindcss/vite": "^4.3.2",
     "astro": "^7.0.6",
+    "new-github-issue-url": "^1.1.0",
     "tailwindcss": "^4.3.2"
   },
   "devDependencies": {
